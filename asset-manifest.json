@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/nanny-services-react-pet-project/static/css/main.20f4d338.css",
-    "main.js": "/nanny-services-react-pet-project/static/js/main.7284adad.js",
+    "main.css": "/nanny-services-react-pet-project/static/css/main.0e58e9c8.css",
+    "main.js": "/nanny-services-react-pet-project/static/js/main.e8d81683.js",
     "static/js/453.9cceef41.chunk.js": "/nanny-services-react-pet-project/static/js/453.9cceef41.chunk.js",
     "index.html": "/nanny-services-react-pet-project/index.html",
-    "main.20f4d338.css.map": "/nanny-services-react-pet-project/static/css/main.20f4d338.css.map",
-    "main.7284adad.js.map": "/nanny-services-react-pet-project/static/js/main.7284adad.js.map",
+    "main.0e58e9c8.css.map": "/nanny-services-react-pet-project/static/css/main.0e58e9c8.css.map",
+    "main.e8d81683.js.map": "/nanny-services-react-pet-project/static/js/main.e8d81683.js.map",
     "453.9cceef41.chunk.js.map": "/nanny-services-react-pet-project/static/js/453.9cceef41.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.20f4d338.css",
-    "static/js/main.7284adad.js"
+    "static/css/main.0e58e9c8.css",
+    "static/js/main.e8d81683.js"
   ]
 }

@@ -1,7 +1,4 @@
-/* --- bring in normalize.css styles --- */
 @import-normalize;
-
-/* --- global styles --- */
 
 body {
   font-family: sans-serif;
@@ -28,4 +25,9 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
 }

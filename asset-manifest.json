@@ -1,15 +1,13 @@
 {
   "files": {
-    "main.css": "/nanny-services-react-pet-project/static/css/main.0e58e9c8.css",
-    "main.js": "/nanny-services-react-pet-project/static/js/main.e8d81683.js",
+    "main.js": "/nanny-services-react-pet-project/static/js/main.078cfb80.js",
     "static/js/453.9cceef41.chunk.js": "/nanny-services-react-pet-project/static/js/453.9cceef41.chunk.js",
+    "static/media/homeBgImg.jpg": "/nanny-services-react-pet-project/static/media/homeBgImg.ec64f219c7d3b04153c4.jpg",
     "index.html": "/nanny-services-react-pet-project/index.html",
-    "main.0e58e9c8.css.map": "/nanny-services-react-pet-project/static/css/main.0e58e9c8.css.map",
-    "main.e8d81683.js.map": "/nanny-services-react-pet-project/static/js/main.e8d81683.js.map",
+    "main.078cfb80.js.map": "/nanny-services-react-pet-project/static/js/main.078cfb80.js.map",
     "453.9cceef41.chunk.js.map": "/nanny-services-react-pet-project/static/js/453.9cceef41.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0e58e9c8.css",
-    "static/js/main.e8d81683.js"
+    "static/js/main.078cfb80.js"
   ]
 }

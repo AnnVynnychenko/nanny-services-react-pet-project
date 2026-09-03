@@ -7,20 +7,21 @@ import {
   RightContainer,
   HeroWrapper,
   RegistrationBtn,
+  AuthBtn,
   UserName,
   UserIcon,
   UserIconContainer,
 } from './Layout.styled';
 import { Container } from '../../styles/Common.styled';
-import { SessionBtn } from '../Buttons';
 
 function Layout() {
   const location = useLocation();
   const isHome = location.pathname === '/';
+  console.log(isHome === false);
 
   // временно пока не реализовала auth
   const auth = {
-    isLoggedIn: true,
+    isLoggedIn: false,
     user: 'Anna',
     onLogout: false,
   };
@@ -33,7 +34,7 @@ function Layout() {
         </NavLink>
         <RightContainer $isHome={isHome}>
           <nav>
-            <HeaderNav>
+            <HeaderNav $isHome={isHome}>
               <li>
                 <NavLink to="/">Home</NavLink>
               </li>
@@ -57,7 +58,8 @@ function Layout() {
                 </UserIconContainer>
                 {auth.user?.displayName ?? 'User'}
               </UserName>
-              <SessionBtn
+              <AuthBtn
+                $isHome={isHome}
                 type="button"
                 onClick={auth.onLogout}
                 title="Log out"
@@ -65,7 +67,8 @@ function Layout() {
             </UserBlock>
           ) : (
             <AuthBlock>
-              <SessionBtn
+              <AuthBtn
+                $isHome={isHome}
                 type="button"
                 onClick={() => {
                   /* відкрити модалку входу */

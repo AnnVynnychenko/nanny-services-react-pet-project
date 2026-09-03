@@ -4,7 +4,10 @@ export const GlobalStyles = createGlobalStyle`
 
 :root {
     --accent-color: #F03F3B;
-    --white-color: #FBFBFB;
+    --light-color: #FBFBFB;
+    --white-color: #FFFFFF;
+    --hover-accent-light: rgba(255, 255, 255, 0.75);
+    --text-shadow-hover: 0 0 8px rgba(255, 255, 255, 0.6);
     --transition-thumb: 500ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 

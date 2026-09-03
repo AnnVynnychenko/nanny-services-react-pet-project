@@ -1,7 +1,7 @@
 import { SessionButton, CommonButton } from './Buttons.styled';
 
-export function SessionBtn({ title }) {
-  return <SessionButton>{title}</SessionButton>;
+export function SessionBtn({ title, className }) {
+  return <SessionButton className={className}>{title}</SessionButton>;
 }
 
 export function CommonBtn({ title, className, paddingX }) {

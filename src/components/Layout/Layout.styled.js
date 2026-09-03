@@ -4,7 +4,7 @@ import { clampBuilder } from '../../helpers/clampBuilder';
 import heroImg from '../../assets/images/homeBgImg.jpg';
 import { breakpoints } from '../../styles/breakPoints';
 import { media } from '../../styles/breakPoints';
-import { CommonBtn } from '../Buttons';
+import { CommonBtn, SessionBtn } from '../Buttons';
 
 const flexCenter = css`
   display: flex;
@@ -65,7 +65,7 @@ export const Header = styled.header`
     $isHome &&
     css`
       border-radius: 30px 30px 0 0;
-      border-bottom: 1px solid var(--white-color);
+      border-bottom: 1px solid var(--light-color);
       overflow: hidden;
     `};
 
@@ -73,7 +73,7 @@ export const Header = styled.header`
     $isHome ? 'transparent' : 'var(--accent-color)'};
 
   .logo {
-    color: var(--white-color);
+    color: var(--light-color);
     font-weight: 500;
     font-size: ${clampBuilder(14, 24)};
   }
@@ -88,10 +88,39 @@ export const RightContainer = styled.div`
 export const HeaderNav = styled.ul`
   ${flexResponsive(clampBuilder(12, 16))}
 
-  li {
-    color: var(--white-color);
+  a {
+    position: relative;
+    color: var(--light-color);
     font-weight: 400;
     font-size: ${clampBuilder(12, 16)};
+    transition: var(--transition-thumb);
+    outline: none;
+
+    &:hover,
+    &:focus {
+      color: var(--white-color);
+      text-shadow: var(--text-shadow-hover);
+    }
+
+    &.active {
+      color: var(--light-color);
+      text-shadow: none;
+      ${({ $isHome }) =>
+        !$isHome &&
+        css`
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100%);
+            width: 0.5em;
+            height: 0.5em;
+            border-radius: 50%;
+            background-color: var(--white-color);
+          }
+        `};
+    }
   }
 `;
 
@@ -104,12 +133,31 @@ export const RegistrationBtn = styled(CommonBtn)`
     $isHome
       ? css`
           background-color: var(--accent-color);
-          color: var(--white-color);
+          color: var(--light-color);
         `
       : css`
-          background-color: var(--white-color);
+          background-color: var(--light-color);
           color: var(--accent-color);
+
+          &:hover,
+          &:focus {
+            color: var(--accent-color);
+            background-color: var(--hover-accent-light);
+          }
         `}
+`;
+
+export const AuthBtn = styled(SessionBtn)`
+  ${({ $isHome }) =>
+    $isHome === false &&
+    css`
+      &:hover,
+      &:focus {
+        color: var(--accent-color);
+        background-color: var(--hover-accent-light);
+        border: 1px solid transparent;
+      }
+    `}
 `;
 
 export const UserBlock = styled.div`
@@ -120,7 +168,7 @@ export const UserName = styled.span`
   ${flexCenter};
   gap: ${clampBuilder(8, 14)};
 
-  color: var(--white-color);
+  color: var(--light-color);
   font-weight: 500;
   font-size: ${clampBuilder(12, 18)};
 `;
@@ -139,6 +187,6 @@ export const UserIconContainer = styled.div`
   width: ${clampBuilder(24, 40)};
   height: ${clampBuilder(24, 40)};
 
-  background-color: var(--white-color);
+  background-color: var(--light-color);
   border-radius: 10px;
 `;

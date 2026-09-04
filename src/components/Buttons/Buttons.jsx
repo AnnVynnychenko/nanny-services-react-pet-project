@@ -1,12 +1,35 @@
 import { SessionButton, CommonButton } from './Buttons.styled';
 
-export function SessionBtn({ title, className }) {
-  return <SessionButton className={className}>{title}</SessionButton>;
+export function SessionBtn({
+  title,
+  className,
+  paddingX,
+  paddingY,
+  children,
+  ...restProps
+}) {
+  return (
+    <SessionButton
+      type="button"
+      className={className}
+      $paddingX={paddingX}
+      $paddingY={paddingY}
+      {...restProps}
+    >
+      {title}
+      {children}
+    </SessionButton>
+  );
 }
 
-export function CommonBtn({ title, className, paddingX }) {
+export function CommonBtn({ title, className, paddingX, ...restProps }) {
   return (
-    <CommonButton className={className} $paddingX={paddingX}>
+    <CommonButton
+      type="button"
+      className={className}
+      $paddingX={paddingX}
+      {...restProps}
+    >
       {title}
     </CommonButton>
   );

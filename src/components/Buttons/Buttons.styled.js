@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { clampBuilder } from '../../helpers/clampBuilder';
 
 export const SessionButton = styled.button`
-  padding: ${clampBuilder(8, 12)} ${clampBuilder(12, 38)};
+  padding: ${({ $paddingX, $paddingY }) =>
+    `${clampBuilder(8, $paddingY)} ${clampBuilder(12, $paddingX)}`};
   border: 1px solid var(--white-color);
   border-radius: 30px;
   color: var(--white-color);
@@ -19,7 +20,7 @@ export const SessionButton = styled.button`
 `;
 
 export const CommonButton = styled.button`
-  padding: ${({ $paddingX = 40 }) =>
+  padding: ${({ $paddingX }) =>
     `${clampBuilder(8, 12)} ${clampBuilder(12, $paddingX)}`};
   border-radius: 30px;
   background-color: var(--accent-color);

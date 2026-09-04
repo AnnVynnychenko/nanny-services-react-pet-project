@@ -6,6 +6,8 @@ export const GlobalStyles = createGlobalStyle`
     --accent-color: #F03F3B;
     --light-color: #FBFBFB;
     --white-color: #FFFFFF;
+    --grey-text-color: rgba(17, 16, 28, 0.5);
+    --dark-text-color: #11101C;
     --hover-accent-light: rgba(255, 255, 255, 0.75);
     --text-shadow-hover: 0 0 8px rgba(255, 255, 255, 0.6);
     --transition-thumb: 500ms cubic-bezier(0.4, 0, 0.2, 1);

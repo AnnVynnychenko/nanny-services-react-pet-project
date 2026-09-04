@@ -1,11 +1,7 @@
+import Hero from '../../components/Hero';
+
 function HomePage() {
-  return (
-    <>
-      <h1>Make Life Easier for the Family:</h1>
-      <p>Find Babysitters Online for All Occasions</p>
-      <button type="button">Get started</button>
-    </>
-  );
+  return <Hero />;
 }
 
 export default HomePage;

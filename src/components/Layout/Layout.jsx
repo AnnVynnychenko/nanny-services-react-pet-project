@@ -21,7 +21,7 @@ function Layout() {
 
   // временно пока не реализовала auth
   const auth = {
-    isLoggedIn: false,
+    isLoggedIn: true,
     user: 'Anna',
     onLogout: false,
   };
@@ -60,24 +60,25 @@ function Layout() {
               </UserName>
               <AuthBtn
                 $isHome={isHome}
-                type="button"
                 onClick={auth.onLogout}
                 title="Log out"
+                paddingX={38}
+                paddingY={12}
               />
             </UserBlock>
           ) : (
             <AuthBlock>
               <AuthBtn
                 $isHome={isHome}
-                type="button"
                 onClick={() => {
                   /* відкрити модалку входу */
                 }}
                 title="Log In"
+                paddingX={38}
+                paddingY={12}
               />
               <RegistrationBtn
                 $isHome={isHome}
-                type="button"
                 onClick={() => {
                   /* відкрити модалку реєстрації */
                 }}

@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/nanny-services-react-pet-project/static/js/main.078cfb80.js",
+    "main.js": "/nanny-services-react-pet-project/static/js/main.f4b9276d.js",
     "static/js/453.9cceef41.chunk.js": "/nanny-services-react-pet-project/static/js/453.9cceef41.chunk.js",
     "static/media/homeBgImg.jpg": "/nanny-services-react-pet-project/static/media/homeBgImg.ec64f219c7d3b04153c4.jpg",
     "index.html": "/nanny-services-react-pet-project/index.html",
-    "main.078cfb80.js.map": "/nanny-services-react-pet-project/static/js/main.078cfb80.js.map",
+    "main.f4b9276d.js.map": "/nanny-services-react-pet-project/static/js/main.f4b9276d.js.map",
     "453.9cceef41.chunk.js.map": "/nanny-services-react-pet-project/static/js/453.9cceef41.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.078cfb80.js"
+    "static/js/main.f4b9276d.js"
   ]
 }

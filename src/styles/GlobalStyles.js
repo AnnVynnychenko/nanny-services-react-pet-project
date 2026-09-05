@@ -6,8 +6,11 @@ export const GlobalStyles = createGlobalStyle`
     --accent-color: #F03F3B;
     --light-color: #FBFBFB;
     --white-color: #FFFFFF;
-    --grey-text-color: rgba(17, 16, 28, 0.5);
     --dark-text-color: #11101C;
+    --background-color: #F3F3F3;
+    --online-round-color: #38CD3E;
+    --accent-transparent: rgba(240, 63, 59, 0.2);
+    --grey-text-color: rgba(17, 16, 28, 0.5);
     --hover-accent-light: rgba(255, 255, 255, 0.75);
     --text-shadow-hover: 0 0 8px rgba(255, 255, 255, 0.6);
     --transition-thumb: 500ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -37,6 +40,10 @@ export const GlobalStyles = createGlobalStyle`
   ol {
     margin: 0;
     padding: 0;
+    list-style: none;
+  }
+
+  li {
     list-style: none;
   }
 

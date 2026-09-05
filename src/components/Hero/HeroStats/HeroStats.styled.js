@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react';
 import styled, { css } from 'styled-components';
-import { clampBuilder } from '../../helpers/clampBuilder';
+import { clampBuilder } from '../../../helpers/clampBuilder';
 
 const flexCenter = css`
   display: flex;
@@ -11,7 +11,7 @@ const flexCenter = css`
 export const DataContainer = styled.div`
   ${flexCenter}
   gap: 16px;
-  max-width: ${clampBuilder(63, 284)};
+  max-width: ${clampBuilder(100, 284)};
   padding: ${clampBuilder(8, 32)};
   background-color: var(--light-color);
   border-radius: 20px;

@@ -1,4 +1,4 @@
-import { HERO_STATS } from '../../data/heroStats';
+import { HERO_STATS } from '../../../data/heroStats';
 import {
   CheckContainer,
   DataContainer,
@@ -21,7 +21,6 @@ function HeroStats() {
           <StatCount>{formattedCount}</StatCount>
         </div>
       </DataContainer>
-      ;
     </>
   );
 }

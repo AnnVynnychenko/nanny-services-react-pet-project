@@ -3,7 +3,7 @@ import Layout from './Layout';
 import HomePage from '../pages/HomePage';
 import NanniesPage from '../pages/NanniesPage';
 import FavoritesPage from '../pages/FavoritesPage';
-import NannyDetails from './NannyDetails';
+import NannyDetails from './NanniesList/NannyDetails';
 
 function App() {
   return (

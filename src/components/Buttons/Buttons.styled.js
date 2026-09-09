@@ -13,9 +13,12 @@ export const SessionButton = styled.button`
   outline: none;
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     color: var(--accent-color);
     background-color: var(--light-color);
+  }
+  &:active {
+    transform: scale(0.95);
   }
 `;
 
@@ -31,8 +34,11 @@ export const CommonButton = styled.button`
   outline: none;
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     color: var(--accent-color);
     background-color: var(--light-color);
+  }
+  &:active {
+    transform: scale(0.95);
   }
 `;

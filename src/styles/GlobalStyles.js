@@ -9,8 +9,11 @@ export const GlobalStyles = createGlobalStyle`
     --dark-text-color: #11101C;
     --background-color: #F3F3F3;
     --online-round-color: #38CD3E;
+    --grey-text-color: #8A8A89;
+    --gold-color: #FFC531;
     --accent-transparent: rgba(240, 63, 59, 0.2);
     --grey-text-color: rgba(17, 16, 28, 0.5);
+    --grey-border-color: rgba(17, 16, 28, 0.2);
     --hover-accent-light: rgba(255, 255, 255, 0.75);
     --text-shadow-hover: 0 0 8px rgba(255, 255, 255, 0.6);
     --transition-thumb: 500ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -66,6 +69,10 @@ export const GlobalStyles = createGlobalStyle`
     color: inherit;
     background-color: transparent;
     cursor: pointer;
+  }
+
+  address {
+    font-style: normal;
   }
 
 `;

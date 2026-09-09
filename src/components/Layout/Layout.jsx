@@ -53,7 +53,6 @@ function Layout() {
             <UserBlock>
               <UserName>
                 <UserIconContainer>
-                  {' '}
                   <UserIcon icon="mdi:account" />
                 </UserIconContainer>
                 {auth.user?.displayName ?? 'User'}

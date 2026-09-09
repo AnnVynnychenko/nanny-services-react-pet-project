@@ -97,7 +97,7 @@ export const HeaderNav = styled.ul`
     outline: none;
 
     &:hover,
-    &:focus {
+    &:focus-visible {
       color: var(--white-color);
       text-shadow: var(--text-shadow-hover);
     }
@@ -140,7 +140,7 @@ export const RegistrationBtn = styled(CommonBtn)`
           color: var(--accent-color);
 
           &:hover,
-          &:focus {
+          &:focus-visible {
             color: var(--accent-color);
             background-color: var(--hover-accent-light);
           }
@@ -152,7 +152,7 @@ export const AuthBtn = styled(SessionBtn)`
     $isHome === false &&
     css`
       &:hover,
-      &:focus {
+      &:focus-visible {
         color: var(--accent-color);
         background-color: var(--hover-accent-light);
         border: 1px solid transparent;

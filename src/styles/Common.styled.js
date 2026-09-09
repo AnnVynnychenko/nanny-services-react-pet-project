@@ -4,6 +4,7 @@ import { clampBuilder } from '../helpers/clampBuilder';
 
 export const Container = styled.div`
   width: 100%;
+  min-height: calc(100vh - 89px);
   max-width: ${breakpoints.desktop};
   margin: 0 auto;
 

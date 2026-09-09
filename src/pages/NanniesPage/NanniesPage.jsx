@@ -1,8 +1,9 @@
+import { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { onValue, ref } from 'firebase/database';
 import { dbFirebase } from '../../firebase/config';
-import { useEffect, useState } from 'react';
 import NanniesList from '../../components/NanniesList';
+import { isOnline } from '../../data/NannyIsOnline';
 
 function NanniesPage() {
   const [nannies, setNannies] = useState([]);
@@ -57,7 +58,7 @@ function NanniesPage() {
 
   return (
     <>
-      <NanniesList nannies={nannies} />
+      <NanniesList nannies={nannies} isOnline={isOnline} />
       <Link to="details">
         <button type="button"></button>
       </Link>

@@ -49,7 +49,7 @@ export const GetStartedBtn = styled(SessionBtn)`
   gap: ${clampBuilder(4, 18)};
   font-size: ${clampBuilder(8, 18)};
 
-  &:hover ${ArrowIcon}, &:focus ${ArrowIcon} {
+  &:hover ${ArrowIcon}, &:focus-visible ${ArrowIcon} {
     color: var(--accent-color);
     transform: rotate(45deg);
   }
@@ -62,9 +62,3 @@ export const StatsContainer = styled.div`
   width: ${clampBuilder(172, 776)};
   padding: ${clampBuilder(12, 50)};
 `;
-
-// &:hover,
-// &:focus {
-//   color: var(--accent-color);
-//   rotate: z 45deg;
-// }

@@ -11,10 +11,16 @@ export const GlobalStyles = createGlobalStyle`
     --online-round-color: #38CD3E;
     --grey-text-color: #8A8A89;
     --gold-color: #FFC531;
+    --error-color: #e74c3c;
     --accent-transparent: rgba(240, 63, 59, 0.2);
-    --grey-text-color: rgba(17, 16, 28, 0.5);
+    --grey-text-color-transp: rgba(17, 16, 28, 0.5);
     --grey-border-color: rgba(17, 16, 28, 0.2);
     --hover-accent-light: rgba(255, 255, 255, 0.75);
+    --modal-backdrop: rgba(11, 11, 11, 0.6);
+    --border-color: rgba(17, 16, 28, 0.1);
+    --modal-option-text-color: rgba(17, 16, 28, 0.5);
+    --select-option-text-color: rgba(17, 16, 28, 0.3);
+    --modal-option-shadow: 0px 20px 69px 0px rgba(0, 0, 0, 0.07);
     --text-shadow-hover: 0 0 8px rgba(255, 255, 255, 0.6);
     --transition-thumb: 500ms cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -74,5 +80,20 @@ export const GlobalStyles = createGlobalStyle`
   address {
     font-style: normal;
   }
+
+  figure {
+    margin: 0;
+  }
+
+  input,
+  select,
+  textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
 
 `;

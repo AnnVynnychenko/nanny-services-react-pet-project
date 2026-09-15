@@ -62,7 +62,7 @@ export const NannyInfoBar = styled.div`
   width: 100%;
 `;
 
-export const CardName = styled.span`
+export const CardName = styled.h2`
   ${commonTextStyle}
   color: var(--grey-text-color);
 `;
@@ -111,12 +111,6 @@ export const NannyAddress = styled.address`
   ${commonTextStyle}
 `;
 
-export const IconStar = styled(Icon)`
-  width: ${clampBuilder(8, 16)};
-  height: ${clampBuilder(8, 16)};
-  color: var(--gold-color);
-`;
-
 export const NannyInfoText = styled.div`
   ${commonTextStyle}
 `;
@@ -154,11 +148,13 @@ export const IconFavorite = styled(Icon)`
   width: ${clampBuilder(18, 26)};
   height: ${clampBuilder(18, 26)};
   color: var(--accent-color);
+  outline: none;
 `;
 
 export const IconLikeEmpty = styled(Icon)`
   width: ${clampBuilder(18, 26)};
   height: ${clampBuilder(18, 26)};
+  outline: none;
 `;
 
 export const NannyHeaderRight = styled.div`
@@ -185,11 +181,19 @@ export const NannyExtraInfoGroup = styled.div`
 `;
 
 export const NannyAboutWrapper = styled.p`
-  margin-bottom: ${clampBuilder(8, 14)};
+  ${({ $showDetails }) =>
+    $showDetails
+      ? css`
+          padding-bottom: ${clampBuilder(8, 24)};
+        `
+      : css`
+          margin-bottom: ${clampBuilder(8, 14)};
+        `}
+
   font-size: ${clampBuilder(8, 16)};
   font-weight: 400;
   line-height: 1.25;
-  color: var(--grey-text-color);
+  color: var(--grey-text-color-transp);
 `;
 
 export const NannyReadMoreBtn = styled.button`
@@ -197,6 +201,7 @@ export const NannyReadMoreBtn = styled.button`
   text-align: left;
   ${commonTextStyle}
   text-decoration: underline;
+  outline: none;
   transition:
     color var(--transition-thumb),
     text-decoration var(--transition-thumb),

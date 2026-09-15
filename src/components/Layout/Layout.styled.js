@@ -154,7 +154,7 @@ export const AuthBtn = styled(SessionBtn)`
       &:hover,
       &:focus-visible {
         color: var(--accent-color);
-        background-color: var(--hover-accent-light);
+        background-color: var(--light-color));
         border: 1px solid transparent;
       }
     `}

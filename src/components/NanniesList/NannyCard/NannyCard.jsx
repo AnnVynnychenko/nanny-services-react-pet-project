@@ -12,7 +12,6 @@ import {
   NannyInfoBar,
   NannyInfoBarContainer,
   NannyInfoGroup,
-  IconStar,
   NannyInfoText,
   NannyRating,
   NannyPrice,
@@ -27,9 +26,12 @@ import {
   NannyReadMoreBtn,
 } from './NannyCard.styled';
 import NannyInfoContainer from '../NannyInfoContainer';
+import NannyReviews from '../NannyReviews';
+import IconStar from '../IconStar';
 
 function NannyCard({ nanny, isOnline }) {
   const [isNannyFavorite, setIsNannyFavorite] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
     if (nanny?.id) {
@@ -40,6 +42,10 @@ function NannyCard({ nanny, isOnline }) {
   function handleFavoriteClick() {
     const status = toggleFavorite(nanny, 'Nanny');
     setIsNannyFavorite(status);
+  }
+
+  function handleReadMoreClick() {
+    setShowDetails(prev => !prev);
   }
 
   const {
@@ -72,7 +78,7 @@ function NannyCard({ nanny, isOnline }) {
                 <NannyAddress>{location}</NannyAddress>
               </NannyInfoGroup>
               <NannyInfoGroup>
-                <IconStar icon="ant-design:star-filled" />
+                <IconStar />
                 <NannyInfoText>Rating: </NannyInfoText>
                 <NannyRating>{rating}</NannyRating>
               </NannyInfoGroup>
@@ -100,13 +106,15 @@ function NannyCard({ nanny, isOnline }) {
         <NannyExtraInfoGroup>
           <NannyInfoContainer dataObj={nannyExtraInfo} />
         </NannyExtraInfoGroup>
-        <NannyAboutWrapper>
-          I have a passion for teaching and mentoring children. I aim to help
-          them grow and learn in a safe and loving environment. I am also a
-          trained child psychologist, which helps me in understanding and
-          catering to the unique needs of every child.
+        <NannyAboutWrapper $showDetails={showDetails}>
+          {about}
         </NannyAboutWrapper>
-        <NannyReadMoreBtn>Read more</NannyReadMoreBtn>
+        {!showDetails && (
+          <NannyReadMoreBtn onClick={handleReadMoreClick}>
+            Read more
+          </NannyReadMoreBtn>
+        )}
+        {showDetails && <NannyReviews nanny={nanny} />}
       </NannyContentWrapper>
     </NannyCardContainer>
   );

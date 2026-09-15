@@ -4,21 +4,23 @@
   "private": true,
   "homepage": "https://AnnVynnychenko.github.io/nanny-services-react-pet-project",
   "dependencies": {
+    "@hookform/resolvers": "^5.9.1",
     "@iconify/react": "^6.0.2",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^13.5.0",
     "firebase": "^12.18.0",
-    "nanoid": "^6.0.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-hook-form": "^7.87.0",
     "react-hot-toast": "^2.6.0",
     "react-router-dom": "^7.18.3",
     "react-scripts": "5.0.1",
     "react-select": "^5.10.2",
     "styled-components": "^6.5.3",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^1.7.1"
   },
   "scripts": {
     "predeploy": "npm run build",

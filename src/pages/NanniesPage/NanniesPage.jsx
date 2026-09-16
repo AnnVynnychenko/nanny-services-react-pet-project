@@ -1,12 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { onValue, ref } from 'firebase/database';
 import { dbFirebase } from '../../firebase/config';
 import NanniesList from '../../components/NanniesList';
 import { isOnline } from '../../data/NannyIsOnline';
+import NanniesFilter from '../../components/NanniesFilter';
+import {
+  filterGreaterThanNumber,
+  filterLessThanOrEqualNumber,
+  sortAtoZ,
+  sortNotPopular,
+  sortPopular,
+  sortZtoA,
+} from '../../helpers/filtersService';
 
 function NanniesPage() {
   const [nannies, setNannies] = useState([]);
+  const [activeFilterValue, setActiveFilterValue] = useState('A to Z');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -53,17 +63,43 @@ function NanniesPage() {
     return () => unsubscribe();
   }, []);
 
+  function handleSelectFilter(filteredValue) {
+    setActiveFilterValue(filteredValue);
+  }
+
+  const visibleNannies = useMemo(() => {
+    switch (activeFilterValue) {
+      case 'A to Z':
+        return sortAtoZ(nannies);
+      case 'Z to A':
+        return sortZtoA(nannies);
+      case 'Less than 10$':
+        return filterLessThanOrEqualNumber(nannies);
+      case 'Greater than 10$':
+        return filterGreaterThanNumber(nannies);
+      case 'Popular':
+        return sortPopular(nannies);
+      case 'Not popular':
+        return sortNotPopular(nannies);
+      case 'Show all':
+        return nannies;
+      default:
+        return nannies;
+    }
+  }, [nannies, activeFilterValue]);
+
   if (loading) return <p>Loading nannies list...</p>;
   if (error) return <p>{error}</p>;
 
   return (
-    <>
-      <NanniesList nannies={nannies} isOnline={isOnline} />
+    <section>
+      <NanniesFilter onSelectFilter={handleSelectFilter} />
+      <NanniesList nannies={visibleNannies} isOnline={isOnline} />
       <Link to="details">
         <button type="button"></button>
       </Link>
       <Outlet />
-    </>
+    </section>
   );
 }
 

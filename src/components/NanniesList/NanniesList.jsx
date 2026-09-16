@@ -1,11 +1,9 @@
-import NanniesFilter from './NanniesFilter';
 import { NanniesListContainer } from './NanniesList.styled';
 import NannyCard from './NannyCard/';
 
 function NanniesList({ nannies, isOnline }) {
   return (
-    <section>
-      <NanniesFilter />
+    <>
       {nannies.length > 0 ? (
         <NanniesListContainer>
           {nannies.map(nanny => (
@@ -15,7 +13,7 @@ function NanniesList({ nannies, isOnline }) {
       ) : (
         <p>No nannies found.</p>
       )}
-    </section>
+    </>
   );
 }
 

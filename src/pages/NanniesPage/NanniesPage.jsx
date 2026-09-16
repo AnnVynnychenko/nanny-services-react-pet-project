@@ -5,14 +5,7 @@ import { dbFirebase } from '../../firebase/config';
 import NanniesList from '../../components/NanniesList';
 import { isOnline } from '../../data/NannyIsOnline';
 import NanniesFilter from '../../components/NanniesFilter';
-import {
-  filterGreaterThanNumber,
-  filterLessThanOrEqualNumber,
-  sortAtoZ,
-  sortNotPopular,
-  sortPopular,
-  sortZtoA,
-} from '../../helpers/filtersService';
+import { filterSwitch } from '../../helpers/filterSwitch';
 
 function NanniesPage() {
   const [nannies, setNannies] = useState([]);
@@ -68,24 +61,7 @@ function NanniesPage() {
   }
 
   const visibleNannies = useMemo(() => {
-    switch (activeFilterValue) {
-      case 'A to Z':
-        return sortAtoZ(nannies);
-      case 'Z to A':
-        return sortZtoA(nannies);
-      case 'Less than 10$':
-        return filterLessThanOrEqualNumber(nannies);
-      case 'Greater than 10$':
-        return filterGreaterThanNumber(nannies);
-      case 'Popular':
-        return sortPopular(nannies);
-      case 'Not popular':
-        return sortNotPopular(nannies);
-      case 'Show all':
-        return nannies;
-      default:
-        return nannies;
-    }
+    return filterSwitch(activeFilterValue, nannies);
   }, [nannies, activeFilterValue]);
 
   if (loading) return <p>Loading nannies list...</p>;

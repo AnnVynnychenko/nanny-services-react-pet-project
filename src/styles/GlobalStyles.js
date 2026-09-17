@@ -69,6 +69,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   button {
+    display: block;
     padding: 0;
     border: none;
     font: inherit;

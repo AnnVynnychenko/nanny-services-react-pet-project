@@ -5,10 +5,13 @@ import NanniesList from '../../components/NanniesList';
 import { isOnline } from '../../data/NannyIsOnline';
 import NanniesFilter from '../../components/NanniesFilter';
 import { filterSwitch } from '../../helpers/filterSwitch';
+import { CARDS_PER_PAGE } from '../../data/pagination';
+import LoadMoreBtn from '../../components/Buttons/LoadMoreBtn/LoadMoreBtn';
 
 function FavoritesPage() {
   const [favorites, setFavorites] = useState([]);
   const [activeFilterValue, setActiveFilterValue] = useState('A to Z');
+  const [cardsLimit, setCardsLimit] = useState(CARDS_PER_PAGE);
 
   function loadFavorites() {
     setFavorites(getFavorites());
@@ -22,13 +25,22 @@ function FavoritesPage() {
     return () => window.removeEventListener('favoritesUpdated', loadFavorites);
   }, []);
 
+  const { visibleNannies, hasMore } = useMemo(() => {
+    const filtered = filterSwitch(activeFilterValue, favorites);
+    return {
+      visibleNannies: filtered.slice(0, cardsLimit),
+      hasMore: cardsLimit < filtered.length,
+    };
+  }, [activeFilterValue, favorites, cardsLimit]);
+
   function handleSelectFilter(filteredValue) {
     setActiveFilterValue(filteredValue);
+    setCardsLimit(CARDS_PER_PAGE);
   }
 
-  const visibleNannies = useMemo(() => {
-    return filterSwitch(activeFilterValue, favorites);
-  }, [favorites, activeFilterValue]);
+  function handleLoadMore() {
+    setCardsLimit(prev => prev + CARDS_PER_PAGE);
+  }
 
   if (!favorites.length) {
     return <p>You haven't added any nannies to favorites yet.</p>;
@@ -42,6 +54,7 @@ function FavoritesPage() {
         <button type="button"></button>
       </Link>
       <Outlet />
+      {hasMore && <LoadMoreBtn onClick={handleLoadMore} />}
     </section>
   );
 }

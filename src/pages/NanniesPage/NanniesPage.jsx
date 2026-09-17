@@ -6,10 +6,13 @@ import NanniesList from '../../components/NanniesList';
 import { isOnline } from '../../data/NannyIsOnline';
 import NanniesFilter from '../../components/NanniesFilter';
 import { filterSwitch } from '../../helpers/filterSwitch';
+import { CARDS_PER_PAGE } from '../../data/pagination';
+import LoadMoreBtn from '../../components/Buttons/LoadMoreBtn/LoadMoreBtn';
 
 function NanniesPage() {
   const [nannies, setNannies] = useState([]);
   const [activeFilterValue, setActiveFilterValue] = useState('A to Z');
+  const [cardsLimit, setCardsLimit] = useState(CARDS_PER_PAGE);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -56,13 +59,22 @@ function NanniesPage() {
     return () => unsubscribe();
   }, []);
 
+  const { visibleNannies, hasMore } = useMemo(() => {
+    const filtered = filterSwitch(activeFilterValue, nannies);
+    return {
+      visibleNannies: filtered.slice(0, cardsLimit),
+      hasMore: cardsLimit < filtered.length,
+    };
+  }, [activeFilterValue, nannies, cardsLimit]);
+
   function handleSelectFilter(filteredValue) {
     setActiveFilterValue(filteredValue);
+    setCardsLimit(CARDS_PER_PAGE);
   }
 
-  const visibleNannies = useMemo(() => {
-    return filterSwitch(activeFilterValue, nannies);
-  }, [nannies, activeFilterValue]);
+  function handleLoadMore() {
+    setCardsLimit(prev => prev + CARDS_PER_PAGE);
+  }
 
   if (loading) return <p>Loading nannies list...</p>;
   if (error) return <p>{error}</p>;
@@ -75,6 +87,7 @@ function NanniesPage() {
         <button type="button"></button>
       </Link>
       <Outlet />
+      {hasMore && <LoadMoreBtn onClick={handleLoadMore} />}
     </section>
   );
 }

@@ -8,8 +8,7 @@ export const Container = styled.div`
   max-width: ${breakpoints.desktop};
   margin: 0 auto;
 
-  padding-inline: ${clampBuilder(28, 128)};
-  padding-top: ${clampBuilder(12, 64)};
+  padding: ${clampBuilder(12, 64)} ${clampBuilder(28, 128)};
 
   background-color: var(--background-color);
 `;

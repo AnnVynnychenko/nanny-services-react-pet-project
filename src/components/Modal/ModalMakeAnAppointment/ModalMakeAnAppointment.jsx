@@ -2,10 +2,10 @@ import { createPortal } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import toast from 'react-hot-toast';
-import { appointmentSchema } from '../../yup/yupSchema';
-import ModalBackdrop from '../Modal/ModalBackdrop';
-import { useScrollLock } from '../../hooks/useScrollLock';
-import { useEscapeClose } from '../../hooks/useEscapeClose';
+import { makeAnAppointmentYapSchema } from '../../../yup/makeAnAppointmentYupSchema';
+import ModalBackdrop from '../ModalBackdrop';
+import { useScrollLock } from '../../../hooks/useScrollLock';
+import { useEscapeClose } from '../../../hooks/useEscapeClose';
 import {
   ModalAppointmentWrapper,
   NannyWrapper,
@@ -21,9 +21,9 @@ import {
   FieldWrapper,
   ErrorMessage,
 } from './ModalMakeAnAppointment.styled';
-import ModalCustomSelect from './ModalCustomSelect/ModalCustomSelect';
+import ModalCustomSelect from './ModalCustomSelect';
 
-const modalAppointmentRoot = document.querySelector('#modal-appointment-root');
+const modalAppointmentRoot = document.getElementById('modal-root');
 
 function ModalMakeAnAppointment({ nanny, onClose }) {
   const { avatar_url, name, id } = nanny || {};
@@ -34,7 +34,7 @@ function ModalMakeAnAppointment({ nanny, onClose }) {
     reset,
     control,
   } = useForm({
-    resolver: yupResolver(appointmentSchema),
+    resolver: yupResolver(makeAnAppointmentYapSchema),
     defaultValues: {
       address: '',
       telephone: '',
@@ -69,9 +69,7 @@ function ModalMakeAnAppointment({ nanny, onClose }) {
   }
 
   if (!modalAppointmentRoot) {
-    console.error(
-      "Target container '#modal-appointment-root' is not in the DOM."
-    );
+    console.error("Target container '#modal-root' is not in the DOM.");
     return null;
   }
 

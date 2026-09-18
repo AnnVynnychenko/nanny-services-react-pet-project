@@ -13,15 +13,25 @@ import {
   UserIconContainer,
 } from './Layout.styled';
 import { Container } from '../../styles/Common.styled';
+import { useToggleModal } from '../../hooks/useToggleModal';
+import ModalRegistration from '../Modal/ModalRegistration';
+import ModalLogIn from '../Modal/ModalLogIn';
 
 function Layout() {
   const location = useLocation();
   const isHome = location.pathname === '/';
-  console.log(isHome === false);
+
+  const {
+    isOpen: showRegistrationModal,
+    toggleModal: toggleRegistrationModal,
+  } = useToggleModal(false);
+
+  const { isOpen: showLogInModal, toggleModal: toggleLogInModal } =
+    useToggleModal(false);
 
   // временно пока не реализовала auth
   const auth = {
-    isLoggedIn: true,
+    isLoggedIn: false,
     user: 'Anna',
     onLogout: false,
   };
@@ -60,7 +70,7 @@ function Layout() {
               <AuthBtn
                 $isHome={isHome}
                 onClick={auth.onLogout}
-                title="Log out"
+                title="Log Out"
                 paddingX={38}
                 paddingY={12}
               />
@@ -69,18 +79,14 @@ function Layout() {
             <AuthBlock>
               <AuthBtn
                 $isHome={isHome}
-                onClick={() => {
-                  /* відкрити модалку входу */
-                }}
+                onClick={toggleLogInModal}
                 title="Log In"
                 paddingX={38}
                 paddingY={12}
               />
               <RegistrationBtn
                 $isHome={isHome}
-                onClick={() => {
-                  /* відкрити модалку реєстрації */
-                }}
+                onClick={toggleRegistrationModal}
                 title="Registration"
                 paddingX={39}
               />
@@ -99,6 +105,10 @@ function Layout() {
           </main>
         </Container>
       )}
+      {showRegistrationModal && (
+        <ModalRegistration onClose={toggleRegistrationModal} />
+      )}
+      {showLogInModal && <ModalLogIn onClose={toggleLogInModal} />}
     </HeroWrapper>
   );
 }

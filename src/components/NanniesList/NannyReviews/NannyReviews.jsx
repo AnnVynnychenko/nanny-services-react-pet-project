@@ -1,6 +1,4 @@
-import { useCallback, useState } from 'react';
 import { getReviewerInitial } from '../../../helpers/getReviewerInitial';
-
 import IconStar from '../IconStar';
 import {
   NannyReviewsContainer,
@@ -13,14 +11,12 @@ import {
   ReviewComment,
   AppointmentBtn,
 } from './NannyReviews.styled';
-import ModalMakeAnAppointment from '../../ModalMakeAnAppointment';
+import ModalMakeAnAppointment from '../../Modal/ModalMakeAnAppointment';
+import { useToggleModal } from '../../../hooks/useToggleModal';
 
 function NannyReviews({ nanny }) {
-  const [showAppointmentModal, setShowAppointmentModal] = useState(false);
-
-  const toggleAppointmentModal = useCallback(() => {
-    setShowAppointmentModal(state => !state);
-  }, []);
+  const { isOpen: showAppointmentModal, toggleModal: toggleAppointmentModal } =
+    useToggleModal(false);
 
   const { reviews } = nanny;
   return (

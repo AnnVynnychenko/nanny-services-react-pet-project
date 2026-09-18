@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react';
 import styled from 'styled-components';
-import { clampBuilder } from '../../../helpers/clampBuilder';
+import { clampBuilder } from '../../../../helpers/clampBuilder';
 
 export const CustomSelectWrapper = styled.div`
   position: relative;

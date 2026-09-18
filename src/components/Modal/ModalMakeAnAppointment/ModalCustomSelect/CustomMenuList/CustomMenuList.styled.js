@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { clampBuilder } from '../../../../helpers/clampBuilder';
+import { clampBuilder } from '../../../../../helpers/clampBuilder';
 
 export const SelectHeader = styled.p`
   text-align: center;

@@ -5,6 +5,7 @@ import HomePage from '../pages/HomePage';
 import NanniesPage from '../pages/NanniesPage';
 import FavoritesPage from '../pages/FavoritesPage';
 import NannyReviews from './NanniesList/NannyReviews';
+import { PrivateRoute } from '../routes/PrivateRoute';
 
 function App() {
   return (
@@ -15,7 +16,10 @@ function App() {
           <Route path="nannies" element={<NanniesPage />}>
             <Route path="details" element={<NannyReviews />} />
           </Route>
-          <Route path="favorites" element={<FavoritesPage />} />
+          <Route
+            path="favorites"
+            element={<PrivateRoute component={FavoritesPage} redirectTo="/" />}
+          />
         </Route>
       </Routes>
       <Toaster

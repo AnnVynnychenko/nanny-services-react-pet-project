@@ -16,6 +16,7 @@ import { Container } from '../../styles/Common.styled';
 import { useToggleModal } from '../../hooks/useToggleModal';
 import ModalRegistration from '../Modal/ModalRegistration';
 import ModalLogIn from '../Modal/ModalLogIn';
+import { useAuth } from '../../hooks/useAuth';
 
 function Layout() {
   const location = useLocation();
@@ -29,12 +30,7 @@ function Layout() {
   const { isOpen: showLogInModal, toggleModal: toggleLogInModal } =
     useToggleModal(false);
 
-  // временно пока не реализовала auth
-  const auth = {
-    isLoggedIn: false,
-    user: 'Anna',
-    onLogout: false,
-  };
+  const { isLoggedIn, user, logOut } = useAuth();
 
   return (
     <HeroWrapper $isHome={isHome}>
@@ -51,7 +47,7 @@ function Layout() {
               <li>
                 <NavLink to="/nannies">Nannies</NavLink>
               </li>
-              {auth.isLoggedIn && (
+              {isLoggedIn && (
                 <li>
                   <NavLink to="/favorites">Favorites</NavLink>
                 </li>
@@ -59,17 +55,17 @@ function Layout() {
             </HeaderNav>
           </nav>
 
-          {auth.isLoggedIn ? (
+          {isLoggedIn ? (
             <UserBlock>
               <UserName>
                 <UserIconContainer>
                   <UserIcon icon="mdi:account" />
                 </UserIconContainer>
-                {auth.user?.displayName ?? 'User'}
+                {user?.displayName ?? 'User'}
               </UserName>
               <AuthBtn
                 $isHome={isHome}
-                onClick={auth.onLogout}
+                onClick={logOut}
                 title="Log Out"
                 paddingX={38}
                 paddingY={12}

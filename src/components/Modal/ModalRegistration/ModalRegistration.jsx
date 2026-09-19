@@ -1,7 +1,6 @@
 import { createPortal } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import toast from 'react-hot-toast';
 import { useScrollLock } from '../../../hooks/useScrollLock';
 import { useEscapeClose } from '../../../hooks/useEscapeClose';
 import ModalBackdrop from '../ModalBackdrop';
@@ -14,6 +13,7 @@ import {
   FieldWrapper,
 } from './ModalRegistrationAndLogIn.styled';
 import { registrationYapSchema } from '../../../yup/registrationYapSchema';
+import { registerUser } from '../../../auth/authentication';
 
 const modalRegistrationRoot = document.getElementById('modal-root');
 
@@ -35,13 +35,15 @@ function ModalRegistration({ onClose }) {
   useScrollLock();
   useEscapeClose(onClose);
 
-  function submitData(data) {
-    console.log('Sending data to backend:', data);
-
-    toast.success('Welcome! Your account has been created.');
-
-    reset();
-    onClose?.();
+  async function submitData(data) {
+    const { email, password, name } = data;
+    try {
+      await registerUser(email, password, name);
+      reset();
+      onClose?.();
+    } catch (err) {
+      console.error('Registration failed:', err.message);
+    }
   }
 
   if (!modalRegistrationRoot) {

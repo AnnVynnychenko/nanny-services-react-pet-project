@@ -1,7 +1,6 @@
 import { createPortal } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import toast from 'react-hot-toast';
 import { useScrollLock } from '../../../hooks/useScrollLock';
 import { useEscapeClose } from '../../../hooks/useEscapeClose';
 import ModalBackdrop from '../ModalBackdrop';
@@ -14,6 +13,7 @@ import {
   FieldWrapper,
 } from '../ModalRegistration/ModalRegistrationAndLogIn.styled';
 import { logInYapSchema } from '../../../yup/logInYapSchema';
+import { logInUser } from '../../../auth/authentication';
 
 const modalLogInRoot = document.getElementById('modal-root');
 
@@ -34,13 +34,15 @@ function ModalLogIn({ onClose }) {
   useScrollLock();
   useEscapeClose(onClose);
 
-  function submitData(data) {
-    console.log('Sending data to backend:', data);
-
-    toast.success('Welcome back!');
-
-    reset();
-    onClose?.();
+  async function submitData(data) {
+    const { email, password } = data;
+    try {
+      await logInUser(email, password);
+      reset();
+      onClose?.();
+    } catch (err) {
+      console.error('Log in failed:', err.message);
+    }
   }
 
   if (!modalLogInRoot) {

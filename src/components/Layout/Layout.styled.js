@@ -35,15 +35,16 @@ export const HeroWrapper = styled.div`
         linear-gradient(
           to right,
           var(--accent-color) 0%,
-          var(--accent-color) 49.2%,
-          transparent 49.2%
+          var(--accent-color) 100%
         ),
         url(${heroImg});
 
-      background-position: center right;
+      background-position:
+        left top,
+        right top;
       background-size:
-        100% 100%,
-        auto 736px;
+        calc(100% - 699px + 1px) 100%,
+        699px 100%;
       background-repeat: no-repeat;
     `}
 `;
@@ -154,7 +155,7 @@ export const AuthBtn = styled(SessionBtn)`
       &:hover,
       &:focus-visible {
         color: var(--accent-color);
-        background-color: var(--light-color));
+        background-color: var(--light-color);
         border: 1px solid transparent;
       }
     `}

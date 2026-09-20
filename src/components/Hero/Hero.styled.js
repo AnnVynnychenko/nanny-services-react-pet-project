@@ -59,6 +59,6 @@ export const StatsContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  width: ${clampBuilder(172, 776)};
+  width: 100%;
   padding: ${clampBuilder(12, 50)};
 `;

@@ -27,20 +27,32 @@ import {
 } from './NannyCard.styled';
 import NannyInfoContainer from '../NannyInfoContainer';
 import NannyReviews from '../NannyReviews';
+import { useAuth } from '../../../hooks/useAuth';
 import IconStar from '../IconStar';
+import toast from 'react-hot-toast';
 
 function NannyCard({ nanny, isOnline }) {
+  const { user, isLoggedIn } = useAuth();
+  const uid = user?.uid;
+
   const [isNannyFavorite, setIsNannyFavorite] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
-    if (nanny?.id) {
-      setIsNannyFavorite(isFavorite(nanny.id));
+    if (nanny?.id && uid) {
+      setIsNannyFavorite(isFavorite(nanny.id, uid));
+    } else {
+      setIsNannyFavorite(false);
     }
-  }, [nanny]);
+  }, [nanny, uid]);
 
   function handleFavoriteClick() {
-    const status = toggleFavorite(nanny, 'Nanny');
+    if (!isLoggedIn) {
+      toast.error('This feature is available only for authorized users.');
+      return;
+    }
+
+    const status = toggleFavorite(nanny, uid, nanny.name);
     setIsNannyFavorite(status);
   }
 

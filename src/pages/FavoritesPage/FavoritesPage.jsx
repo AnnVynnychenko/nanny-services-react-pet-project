@@ -7,23 +7,27 @@ import NanniesFilter from '../../components/NanniesFilter';
 import { filterSwitch } from '../../helpers/filterSwitch';
 import { CARDS_PER_PAGE } from '../../data/pagination';
 import LoadMoreBtn from '../../components/Buttons/LoadMoreBtn/LoadMoreBtn';
+import { useAuth } from '../../hooks/useAuth';
 
 function FavoritesPage() {
+  const { user } = useAuth();
+  const uid = user?.uid;
+
   const [favorites, setFavorites] = useState([]);
   const [activeFilterValue, setActiveFilterValue] = useState('A to Z');
   const [cardsLimit, setCardsLimit] = useState(CARDS_PER_PAGE);
 
-  function loadFavorites() {
-    setFavorites(getFavorites());
+  function loadFavorites(uid) {
+    setFavorites(getFavorites(uid));
   }
 
   useEffect(() => {
-    loadFavorites();
+    loadFavorites(uid);
 
     window.addEventListener('favoritesUpdated', loadFavorites);
 
     return () => window.removeEventListener('favoritesUpdated', loadFavorites);
-  }, []);
+  }, [uid]);
 
   const { visibleNannies, hasMore } = useMemo(() => {
     const filtered = filterSwitch(activeFilterValue, favorites);

@@ -17,16 +17,19 @@ function FavoritesPage() {
   const [activeFilterValue, setActiveFilterValue] = useState('A to Z');
   const [cardsLimit, setCardsLimit] = useState(CARDS_PER_PAGE);
 
-  function loadFavorites(uid) {
-    setFavorites(getFavorites(uid));
-  }
-
   useEffect(() => {
-    loadFavorites(uid);
+    if (!uid) return;
 
-    window.addEventListener('favoritesUpdated', loadFavorites);
+    setFavorites(getFavorites(uid));
 
-    return () => window.removeEventListener('favoritesUpdated', loadFavorites);
+    const handleFavoritesUpdate = () => {
+      setFavorites(getFavorites(uid));
+    };
+
+    window.addEventListener('favoritesUpdated', handleFavoritesUpdate);
+
+    return () =>
+      window.removeEventListener('favoritesUpdated', handleFavoritesUpdate);
   }, [uid]);
 
   const { visibleNannies, hasMore } = useMemo(() => {
@@ -52,7 +55,12 @@ function FavoritesPage() {
 
   return (
     <section>
-      {favorites && <NanniesFilter onSelectFilter={handleSelectFilter} />}
+      {favorites && (
+        <NanniesFilter
+          onSelectFilter={handleSelectFilter}
+          activeFilterValue={activeFilterValue}
+        />
+      )}
       <NanniesList nannies={visibleNannies} isOnline={isOnline} />
       <Link to="details">
         <button type="button"></button>

@@ -20,11 +20,11 @@ function FavoritesPage() {
   useEffect(() => {
     if (!uid) return;
 
-    setFavorites(getFavorites(uid));
-
     const handleFavoritesUpdate = () => {
       setFavorites(getFavorites(uid));
     };
+
+    handleFavoritesUpdate();
 
     window.addEventListener('favoritesUpdated', handleFavoritesUpdate);
 

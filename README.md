@@ -16,6 +16,8 @@ nannies, featuring Firebase authentication and personalized dynamic storage.
 
 ## 📂 Project Structure
 
+- `src/api/` — API services for fetching and querying data from the Firebase
+  Realtime Database.
 - `src/assets/` — Static assets.
 - `src/auth/` — Authentication functions.
 - `src/components/` — UI components powering the app interface.
@@ -42,9 +44,12 @@ nannies, featuring Firebase authentication and personalized dynamic storage.
 - **Interactive Nanny Cards:** Detailed information displays, expandable reviews
   section, and instant heart state toggles to easily add or remove nannies from
   favorites.
-- **Filtering & Pagination:** Advanced filtering by 7 different criteria
-  available on both Nannies and Favorites pages, along with a "Load more" button
-  for smooth pagination.
+- **Filtering & Pagination:**
+  - **Nannies page:** Dynamic server-side sorting and queries via Firebase
+    Realtime Database.
+  - **Favorites page:** Fast client-side filtering of saved nannies.
+  - **Pagination:** Smooth "Load more" functionality for chunked data fetching
+    and display.
 - **Protected Routes:** Restricted access to the `Favorites` page for
   authenticated users.
 

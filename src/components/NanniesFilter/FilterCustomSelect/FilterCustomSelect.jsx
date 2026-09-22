@@ -4,7 +4,6 @@ import {
   FilterSelectWrapper,
   IconArrowDown,
 } from './FilterCustomSelect.styled';
-import { useState } from 'react';
 
 const options = [
   { value: 'A to Z', label: 'A to Z' },
@@ -16,12 +15,11 @@ const options = [
   { value: 'Show all', label: 'Show all' },
 ];
 
-function FilterCustomSelect({ onFilterChange }) {
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+function FilterCustomSelect({ onFilterChange, activeFilterValue = 'A to Z' }) {
+  const selectedOption =
+    options.find(option => option.value === activeFilterValue) || options[0];
 
   function handleChange(option) {
-    setSelectedOption(option);
-
     if (onFilterChange) {
       onFilterChange(option ? option.value : '');
     }

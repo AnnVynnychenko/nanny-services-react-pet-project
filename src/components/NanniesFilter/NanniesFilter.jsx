@@ -1,7 +1,7 @@
 import FilterCustomSelect from './FilterCustomSelect';
 import { FilterWrapper, Title } from './NanniesFilter.styled';
 
-function NanniesFilter({ onSelectFilter }) {
+function NanniesFilter({ onSelectFilter, activeFilterValue }) {
   function handleFilterChange(filterValue) {
     if (onSelectFilter) {
       onSelectFilter(filterValue);
@@ -11,7 +11,10 @@ function NanniesFilter({ onSelectFilter }) {
   return (
     <FilterWrapper>
       <Title>Filters</Title>
-      <FilterCustomSelect onFilterChange={handleFilterChange} />
+      <FilterCustomSelect
+        onFilterChange={handleFilterChange}
+        activeFilterValue={activeFilterValue}
+      />
     </FilterWrapper>
   );
 }

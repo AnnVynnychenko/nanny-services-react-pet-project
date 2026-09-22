@@ -1,79 +1,81 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import { onValue, ref } from 'firebase/database';
-import { dbFirebase } from '../../firebase/config';
+import { get } from 'firebase/database';
 import NanniesList from '../../components/NanniesList';
 import { isOnline } from '../../data/NannyIsOnline';
 import NanniesFilter from '../../components/NanniesFilter';
-import { filterSwitch } from '../../helpers/filterSwitch';
 import { CARDS_PER_PAGE } from '../../data/pagination';
 import LoadMoreBtn from '../../components/Buttons/LoadMoreBtn/LoadMoreBtn';
+import { parseSnapshot } from '../../helpers/filtersService';
+import { buildFirebaseQuery } from '../../api/nanniesApi';
 
 function NanniesPage() {
   const [nannies, setNannies] = useState([]);
   const [activeFilterValue, setActiveFilterValue] = useState('A to Z');
-  const [cardsLimit, setCardsLimit] = useState(CARDS_PER_PAGE);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
+  const [cardsLimit, setCardsLimit] = useState(CARDS_PER_PAGE);
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
-
-    const nanniesRef = ref(dbFirebase, 'nannies');
-
-    const unsubscribe = onValue(
-      nanniesRef,
-      snapshot => {
-        try {
-          const data = snapshot.val();
-
-          if (data) {
-            const parsedData = Array.isArray(data)
-              ? data
-              : Object.keys(data).map(key => ({
-                  id: key,
-                  ...data[key],
-                }));
-
-            setNannies(parsedData);
-          } else {
-            setNannies([]);
-          }
-        } catch (parseError) {
-          console.error('Data transformation error:', parseError);
-          setError('Failed to process incoming nannies data.');
-        } finally {
-          setLoading(false);
-        }
-      },
-      firebaseError => {
-        console.error('Firebase Realtime Database error:', firebaseError);
-        setError(
-          'Failed to fetch data from the server. Please try again later.'
-        );
-        setLoading(false);
+    const fetchNannies = async () => {
+      if (cardsLimit === CARDS_PER_PAGE) {
+        setLoading(true);
+      } else {
+        setLoadingMore(true);
       }
-    );
+      setError(null);
 
-    return () => unsubscribe();
-  }, []);
+      try {
+        const currentQuery = buildFirebaseQuery(
+          activeFilterValue,
+          cardsLimit + 1
+        );
+        const snapshot = await get(currentQuery);
 
-  const { visibleNannies, hasMore } = useMemo(() => {
-    const filtered = filterSwitch(activeFilterValue, nannies);
-    return {
-      visibleNannies: filtered.slice(0, cardsLimit),
-      hasMore: cardsLimit < filtered.length,
+        if (snapshot.exists()) {
+          let parsedData = parseSnapshot(snapshot);
+
+          const hasMoreItems = parsedData.length > cardsLimit;
+
+          if (hasMoreItems) {
+            parsedData = parsedData.slice(0, cardsLimit);
+          }
+
+          const filterReverse = ['Z to A', 'Popular'].includes(
+            activeFilterValue
+          );
+
+          if (filterReverse) {
+            parsedData.reverse();
+          }
+
+          setNannies(parsedData);
+          setHasMore(hasMoreItems);
+        } else {
+          setNannies([]);
+          setHasMore(false);
+        }
+      } catch (err) {
+        console.error('Firebase query error:', err);
+        setError('Failed to fetch data from the server.');
+      } finally {
+        setLoading(false);
+        setLoadingMore(false);
+      }
     };
-  }, [activeFilterValue, nannies, cardsLimit]);
+
+    fetchNannies();
+  }, [activeFilterValue, cardsLimit]);
+
+  function handleLoadMore() {
+    setCardsLimit(prev => prev + CARDS_PER_PAGE);
+  }
 
   function handleSelectFilter(filteredValue) {
     setActiveFilterValue(filteredValue);
     setCardsLimit(CARDS_PER_PAGE);
-  }
-
-  function handleLoadMore() {
-    setCardsLimit(prev => prev + CARDS_PER_PAGE);
   }
 
   if (loading) return <p>Loading nannies list...</p>;
@@ -81,13 +83,18 @@ function NanniesPage() {
 
   return (
     <section>
-      <NanniesFilter onSelectFilter={handleSelectFilter} />
-      <NanniesList nannies={visibleNannies} isOnline={isOnline} />
+      <NanniesFilter
+        onSelectFilter={handleSelectFilter}
+        activeFilterValue={activeFilterValue}
+      />
+      <NanniesList nannies={nannies} isOnline={isOnline} />
       <Link to="details">
         <button type="button"></button>
       </Link>
       <Outlet />
-      {hasMore && <LoadMoreBtn onClick={handleLoadMore} />}
+      {hasMore && (
+        <LoadMoreBtn onClick={handleLoadMore} disabled={loadingMore} />
+      )}
     </section>
   );
 }

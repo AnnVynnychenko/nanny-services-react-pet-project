@@ -1,5 +1,16 @@
+export const parseSnapshot = snapshot => {
+  const nannies = [];
+  snapshot.forEach(childSnapshot => {
+    nannies.push({
+      ...childSnapshot.val(),
+      id: childSnapshot.key,
+    });
+  });
+  return nannies;
+};
+
 export const sortAtoZ = (arr = [], key = 'name') => {
-  return [...arr].sort((a, b) => {
+  return arr.sort((a, b) => {
     const valA = a[key] ?? '';
     const valB = b[key] ?? '';
     return valA.localeCompare(valB);
@@ -7,7 +18,7 @@ export const sortAtoZ = (arr = [], key = 'name') => {
 };
 
 export const sortZtoA = (arr = [], key = 'name') => {
-  return [...arr].sort((a, b) => {
+  return arr.sort((a, b) => {
     const valA = a[key] ?? '';
     const valB = b[key] ?? '';
     return valB.localeCompare(valA);
@@ -53,7 +64,7 @@ export const filterGreaterThanNumber = (
 };
 
 export const sortPopular = (arr = [], key = 'rating') => {
-  return [...arr].sort((a, b) => {
+  return arr.sort((a, b) => {
     const valA = parseFloat(a[key]);
     const valB = parseFloat(b[key]);
 
@@ -65,7 +76,7 @@ export const sortPopular = (arr = [], key = 'rating') => {
 };
 
 export const sortNotPopular = (arr = [], key = 'rating') => {
-  return [...arr].sort((a, b) => {
+  return arr.sort((a, b) => {
     const valA = parseFloat(a[key]);
     const valB = parseFloat(b[key]);
 

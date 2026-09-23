@@ -12,7 +12,11 @@ function ModalContainer({ title, explanation, children, className, onClose }) {
 
   return (
     <ModalWrapper className={className}>
-      <ModalCloseBtn icon="ci:close-md" onClick={handleModalCloseClick} />
+      <ModalCloseBtn
+        icon="ci:close-md"
+        onClick={handleModalCloseClick}
+        aria-label="close modal"
+      />
       <ModalTitle>{title}</ModalTitle>
       <ModalExplanation>{explanation}</ModalExplanation>
       {children}

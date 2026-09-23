@@ -50,6 +50,8 @@ nannies, featuring Firebase authentication and personalized dynamic storage.
   - **Favorites page:** Fast client-side filtering of saved nannies.
   - **Pagination:** Smooth "Load more" functionality for chunked data fetching
     and display.
+- **URL Filter Sync:** Synchronizes page filters with URL query parameters using
+  `useSearchParams` for shareable and stateful links.
 - **Protected Routes:** Restricted access to the `Favorites` page for
   authenticated users.
 

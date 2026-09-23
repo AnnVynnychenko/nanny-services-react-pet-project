@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useSearchParams } from 'react-router-dom';
 import { get } from 'firebase/database';
 import NanniesList from '../../components/NanniesList';
 import { isOnline } from '../../data/NannyIsOnline';
@@ -8,15 +8,18 @@ import { CARDS_PER_PAGE } from '../../data/pagination';
 import LoadMoreBtn from '../../components/Buttons/LoadMoreBtn/LoadMoreBtn';
 import { parseSnapshot } from '../../helpers/filtersService';
 import { buildFirebaseQuery } from '../../api/nanniesApi';
+import { DEFAULT_FILTER } from '../../data/filterDefaultParam';
 
 function NanniesPage() {
   const [nannies, setNannies] = useState([]);
-  const [activeFilterValue, setActiveFilterValue] = useState('A to Z');
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState(null);
   const [hasMore, setHasMore] = useState(true);
   const [cardsLimit, setCardsLimit] = useState(CARDS_PER_PAGE);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeFilterValue = searchParams.get('filter') || DEFAULT_FILTER;
 
   useEffect(() => {
     const fetchNannies = async () => {
@@ -74,7 +77,13 @@ function NanniesPage() {
   }
 
   function handleSelectFilter(filteredValue) {
-    setActiveFilterValue(filteredValue);
+    if (filteredValue === DEFAULT_FILTER) {
+      searchParams.delete('filter');
+    } else {
+      searchParams.set('filter', filteredValue);
+    }
+
+    setSearchParams(searchParams);
     setCardsLimit(CARDS_PER_PAGE);
   }
 

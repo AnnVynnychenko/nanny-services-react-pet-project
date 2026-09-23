@@ -16,6 +16,8 @@ export const EyeBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  width: ${clampBuilder(12, 20)};
+  height: ${clampBuilder(12, 20)};
   color: var(--dark-text-color);
 
   &:hover {

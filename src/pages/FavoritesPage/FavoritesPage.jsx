@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useSearchParams } from 'react-router-dom';
 import { getFavorites } from '../../helpers/favoritesService';
 import NanniesList from '../../components/NanniesList';
 import { isOnline } from '../../data/NannyIsOnline';
@@ -8,14 +8,17 @@ import { filterSwitch } from '../../helpers/filterSwitch';
 import { CARDS_PER_PAGE } from '../../data/pagination';
 import LoadMoreBtn from '../../components/Buttons/LoadMoreBtn/LoadMoreBtn';
 import { useAuth } from '../../hooks/useAuth';
+import { DEFAULT_FILTER } from '../../data/filterDefaultParam';
 
 function FavoritesPage() {
+  const [favorites, setFavorites] = useState([]);
+  const [cardsLimit, setCardsLimit] = useState(CARDS_PER_PAGE);
+
   const { user } = useAuth();
   const uid = user?.uid;
 
-  const [favorites, setFavorites] = useState([]);
-  const [activeFilterValue, setActiveFilterValue] = useState('A to Z');
-  const [cardsLimit, setCardsLimit] = useState(CARDS_PER_PAGE);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeFilterValue = searchParams.get('filter') || DEFAULT_FILTER;
 
   useEffect(() => {
     if (!uid) return;
@@ -41,7 +44,13 @@ function FavoritesPage() {
   }, [activeFilterValue, favorites, cardsLimit]);
 
   function handleSelectFilter(filteredValue) {
-    setActiveFilterValue(filteredValue);
+    if (filteredValue === DEFAULT_FILTER) {
+      searchParams.delete('filter');
+    } else {
+      searchParams.set('filter', filteredValue);
+    }
+
+    setSearchParams(searchParams);
     setCardsLimit(CARDS_PER_PAGE);
   }
 

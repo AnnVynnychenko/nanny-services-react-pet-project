@@ -22,7 +22,7 @@ export const GlobalStyles = createGlobalStyle`
     --select-option-text-color: rgba(17, 16, 28, 0.3);
     --modal-option-shadow: 0px 20px 69px 0px rgba(0, 0, 0, 0.07);
     --text-shadow-hover: 0 0 8px rgba(255, 255, 255, 0.6);
-    --transition-thumb: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-thumb: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   *, *::before, *::after {

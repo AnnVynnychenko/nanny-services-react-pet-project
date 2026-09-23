@@ -32,16 +32,6 @@ export const HeroContainer = styled.div`
   }
 `;
 
-export const ArrowIcon = styled(Icon)`
-  width: ${clampBuilder(8, 24)};
-  height: ${clampBuilder(8, 24)};
-  color: var(--light-color);
-  transition:
-    transform var(--transition-thumb),
-    color var(--transition-thumb);
-  outline: none;
-`;
-
 export const GetStartedBtn = styled(SessionBtn)`
   display: flex;
   align-items: center;
@@ -49,9 +39,48 @@ export const GetStartedBtn = styled(SessionBtn)`
   gap: ${clampBuilder(4, 18)};
   font-size: ${clampBuilder(8, 18)};
 
-  &:hover ${ArrowIcon}, &:focus-visible ${ArrowIcon} {
-    color: var(--accent-color);
-    transform: rotate(45deg);
+  transition:
+    color var(--transition-thumb),
+    background-color var(--transition-thumb);
+`;
+
+export const ArrowIconWrapper = styled.span`
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: ${clampBuilder(8, 24)};
+  height: ${clampBuilder(8, 24)};
+  flex-shrink: 0;
+`;
+
+export const ArrowIcon = styled(Icon)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+
+  transition: opacity var(--transition-thumb);
+
+  &.default-icon {
+    opacity: 1;
+  }
+
+  &.hover-icon {
+    opacity: 0;
+  }
+
+  ${GetStartedBtn}:hover &.default-icon,
+  ${GetStartedBtn}:focus-visible &.default-icon {
+    opacity: 0;
+  }
+
+  ${GetStartedBtn}:hover &.hover-icon,
+  ${GetStartedBtn}:focus-visible &.hover-icon {
+    opacity: 1;
   }
 `;
 

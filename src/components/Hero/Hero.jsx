@@ -5,6 +5,7 @@ import {
   HeroContainer,
   GetStartedBtn,
   StatsContainer,
+  ArrowIconWrapper,
 } from './Hero.styled';
 import { useNavigate } from 'react-router-dom';
 
@@ -26,7 +27,10 @@ function Hero() {
           paddingY={16}
           onClick={handleGetStartedClick}
         >
-          <ArrowIcon icon="ci:arrow-up-right-lg" />
+          <ArrowIconWrapper>
+            <ArrowIcon icon="ci:arrow-up-right-lg" className="default-icon" />
+            <ArrowIcon icon="ci:arrow-right-lg" className="hover-icon" />
+          </ArrowIconWrapper>
         </GetStartedBtn>
       </HeroContainer>
       <StatsContainer>

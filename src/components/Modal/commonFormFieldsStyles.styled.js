@@ -11,6 +11,9 @@ export const commonFormFieldsStyles = css`
   line-height: 1.25;
   transition: var(--transition-thumb);
 
+  ${({ $hasRightIcon }) =>
+    $hasRightIcon && `padding-right: ${clampBuilder(20, 40)};`}
+
   &::placeholder {
     font-size: ${clampBuilder(8, 16)};
     font-weight: 400;

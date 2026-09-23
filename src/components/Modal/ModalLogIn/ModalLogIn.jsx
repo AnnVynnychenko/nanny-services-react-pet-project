@@ -14,10 +14,14 @@ import {
 } from '../ModalRegistration/ModalRegistrationAndLogIn.styled';
 import { logInYapSchema } from '../../../yup/logInYapSchema';
 import { logInUser } from '../../../auth/authentication';
+import EyeIconBtn from '../../Buttons/EyeIconBtn/EyeIconBtn';
+import { useState } from 'react';
 
 const modalLogInRoot = document.getElementById('modal-root');
 
 function ModalLogIn({ onClose }) {
+  const [showPassword, setShowPassword] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -45,6 +49,10 @@ function ModalLogIn({ onClose }) {
     }
   }
 
+  function togglePasswordVisibility() {
+    setShowPassword(prev => !prev);
+  }
+
   if (!modalLogInRoot) {
     console.error("Target container '#modal-root' is not in the DOM.");
     return null;
@@ -65,7 +73,16 @@ function ModalLogIn({ onClose }) {
             )}
           </FieldWrapper>
           <FieldWrapper>
-            <Input {...register('password')} placeholder="Password" />
+            <Input
+              {...register('password')}
+              placeholder="Password"
+              type={showPassword ? 'text' : 'password'}
+              $hasRightIcon
+            />
+            <EyeIconBtn
+              showPassword={showPassword}
+              togglePasswordVisibility={togglePasswordVisibility}
+            />
             {errors.password && (
               <ErrorMessage>{errors.password.message}</ErrorMessage>
             )}

@@ -6,6 +6,8 @@ import {
   GetStartedBtn,
   StatsContainer,
   ArrowIconWrapper,
+  HeroTitle,
+  HeroText,
 } from './Hero.styled';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,8 +21,8 @@ function Hero() {
   return (
     <HeroSection>
       <HeroContainer>
-        <h1>Make Life Easier for the Family:</h1>
-        <p>Find Babysitters Online for All Occasions</p>
+        <HeroTitle>Make Life Easier for the Family:</HeroTitle>
+        <HeroText>Find Babysitters Online for All Occasions</HeroText>
         <GetStartedBtn
           title="Get started"
           paddingX={46}

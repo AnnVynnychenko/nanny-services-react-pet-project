@@ -1,6 +1,7 @@
 import { Icon } from '@iconify/react';
 import styled, { css } from 'styled-components';
 import { clampBuilder } from '../../../helpers/clampBuilder';
+import { media } from '../../../styles/breakPoints';
 
 const flexCenter = css`
   display: flex;
@@ -10,11 +11,14 @@ const flexCenter = css`
 
 export const DataContainer = styled.div`
   ${flexCenter}
-  gap: 16px;
-  max-width: ${clampBuilder(100, 284)};
+  gap: ${clampBuilder(8, 16)};
   padding: ${clampBuilder(8, 32)};
   background-color: var(--light-color);
-  border-radius: 20px;
+  border-radius: ${clampBuilder(12, 20)};
+
+  ${media.desktop} {
+    max-width: 284px;
+  }
 `;
 
 export const CheckContainer = styled.div`

@@ -38,7 +38,7 @@ function Layout() {
         <NavLink to="/" className="logo">
           Nanny.Services
         </NavLink>
-        <RightContainer $isHome={isHome}>
+        <RightContainer $isHome={isHome} $isLoggedIn={isLoggedIn}>
           <nav>
             <HeaderNav $isHome={isHome}>
               <li>

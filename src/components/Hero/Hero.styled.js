@@ -2,34 +2,50 @@ import { Icon } from '@iconify/react';
 import styled from 'styled-components';
 import { clampBuilder } from '../../helpers/clampBuilder';
 import { SessionBtn } from '../Buttons';
+import { media } from '../../styles/breakPoints';
 
 export const HeroSection = styled.section`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  ${media.tablet} {
+    flex-direction: row;
+  }
 `;
 
 export const HeroContainer = styled.div`
-  max-width: ${clampBuilder(134, 600)};
-  padding-block: ${clampBuilder(36, 160)};
-  padding-left: ${clampBuilder(20, 96)};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 
-  h1 {
-    margin-bottom: ${clampBuilder(8, 28)};
-    font-size: ${clampBuilder(16, 70)};
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    color: var(--light-color);
-  }
+  padding-block: ${clampBuilder(24, 163)};
+  padding-inline: ${clampBuilder(12, 96)};
 
-  p {
-    margin-bottom: ${clampBuilder(12, 64)};
-    font-size: ${clampBuilder(12, 28)};
-    font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--light-color);
+  ${media.tablet} {
+    align-items: flex-start;
+    text-align: left;
+    max-width: ${clampBuilder(160, 600)};
+    padding-left: ${clampBuilder(20, 96)};
+    padding-right: 0;
   }
+`;
+
+export const HeroTitle = styled.h1`
+  margin-bottom: ${clampBuilder(12, 28)};
+  font-size: ${clampBuilder(16, 70)};
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--light-color);
+`;
+
+export const HeroText = styled.p`
+  margin-bottom: ${clampBuilder(12, 64)};
+  font-size: ${clampBuilder(12, 28)};
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--light-color);
 `;
 
 export const GetStartedBtn = styled(SessionBtn)`
@@ -37,8 +53,7 @@ export const GetStartedBtn = styled(SessionBtn)`
   align-items: center;
   justify-content: center;
   gap: ${clampBuilder(4, 18)};
-  font-size: ${clampBuilder(8, 18)};
-
+  font-size: ${clampBuilder(12, 18)};
   transition:
     color var(--transition-thumb),
     background-color var(--transition-thumb);
@@ -49,9 +64,8 @@ export const ArrowIconWrapper = styled.span`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  width: ${clampBuilder(8, 24)};
-  height: ${clampBuilder(8, 24)};
+  width: ${clampBuilder(12, 24)};
+  height: ${clampBuilder(12, 24)};
   flex-shrink: 0;
 `;
 
@@ -86,8 +100,12 @@ export const ArrowIcon = styled(Icon)`
 
 export const StatsContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: flex-end;
   width: 100%;
   padding: ${clampBuilder(12, 50)};
+
+  ${media.tablet} {
+    justify-content: flex-end;
+  }
 `;

@@ -5,7 +5,7 @@ export const SessionButton = styled.button`
   padding: ${({ $paddingX, $paddingY }) =>
     `${clampBuilder(8, $paddingY)} ${clampBuilder(12, $paddingX)}`};
   border: 1px solid var(--white-color);
-  border-radius: 30px;
+  border-radius: ${clampBuilder(12, 30)};
   color: var(--white-color);
   font-weight: 500;
   font-size: ${clampBuilder(12, 16)};
@@ -25,7 +25,7 @@ export const SessionButton = styled.button`
 export const CommonButton = styled.button`
   padding: ${({ $paddingX }) =>
     `${clampBuilder(8, 12)} ${clampBuilder(12, $paddingX)}`};
-  border-radius: 30px;
+  border-radius: ${clampBuilder(12, 30)};
   background-color: var(--accent-color);
   color: var(--white-color);
   font-weight: 500;

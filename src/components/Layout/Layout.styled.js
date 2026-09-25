@@ -16,7 +16,6 @@ const flexResponsive = gapValue => css`
   flex-direction: column;
   align-items: center;
   gap: ${gapValue};
-  flex-direction: column;
 `;
 
 export const HeroWrapper = styled.div`
@@ -47,8 +46,13 @@ export const HeroWrapper = styled.div`
 
 export const Header = styled.header`
   ${flexCenter};
-  justify-content: space-between;
-  gap: ${clampBuilder(8, 16)};
+
+  gap: ${({ $isHome, $isLoggedIn }) => {
+    if ($isHome) {
+      return $isLoggedIn ? clampBuilder(28, 416) : clampBuilder(20, 474);
+    }
+    return clampBuilder(28, 305);
+  }};
 
   max-width: ${({ $isHome }) =>
     $isHome ? breakpoints.desktopHome : breakpoints.desktop};
@@ -79,12 +83,11 @@ export const Header = styled.header`
 
 export const RightContainer = styled.div`
   ${flexCenter};
-  gap: ${({ $isHome, $isLoggedIn }) => {
-    if ($isHome) {
-      return $isLoggedIn ? clampBuilder(28, 64) : clampBuilder(20, 92);
-    }
-    return clampBuilder(28, 217);
-  }};
+  flex: 1;
+
+  min-width: 0;
+
+  gap: ${clampBuilder(8, 16)};
 `;
 
 export const HeaderNav = styled.ul`
@@ -105,6 +108,7 @@ export const HeaderNav = styled.ul`
     align-items: center;
     justify-content: center;
     line-height: 1;
+
     color: var(--light-color);
     font-weight: 400;
     font-size: ${clampBuilder(12, 16)};
@@ -142,7 +146,9 @@ export const HeaderNav = styled.ul`
 export const AuthBlock = styled.div`
   ${flexResponsive('8px')}
 
-  ${media.tablet} {
+  margin-left: auto;
+
+  ${media.desktop} {
     flex-direction: row;
   }
 `;
@@ -189,18 +195,25 @@ export const AuthBtn = styled(SessionBtn)`
 export const UserBlock = styled.div`
   ${flexResponsive(clampBuilder(8, 24))}
 
-  ${media.tablet} {
+  margin-left: auto;
+
+  ${media.desktop} {
     flex-direction: row;
   }
 `;
 
-export const UserName = styled.span`
+export const UserContainer = styled.span`
   ${flexCenter};
   gap: ${clampBuilder(8, 14)};
+
+  min-width: 0;
+  max-width: ${clampBuilder(80, 156)};
 
   color: var(--light-color);
   font-weight: 500;
   font-size: ${clampBuilder(12, 18)};
+
+  cursor: default;
 `;
 
 export const UserIcon = styled(Icon)`
@@ -213,10 +226,18 @@ export const UserIcon = styled(Icon)`
 export const UserIconContainer = styled.div`
   ${flexCenter};
   justify-content: center;
+  flex-shrink: 0;
 
   width: ${clampBuilder(24, 40)};
   height: ${clampBuilder(24, 40)};
 
   background-color: var(--light-color);
   border-radius: 10px;
+`;
+
+export const UserName = styled.span`
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;

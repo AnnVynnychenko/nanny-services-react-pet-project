@@ -8,6 +8,7 @@ import {
   HeroWrapper,
   RegistrationBtn,
   AuthBtn,
+  UserContainer,
   UserName,
   UserIcon,
   UserIconContainer,
@@ -34,7 +35,7 @@ function Layout() {
 
   return (
     <HeroWrapper $isHome={isHome}>
-      <Header $isHome={isHome}>
+      <Header $isHome={isHome} $isLoggedIn={isLoggedIn}>
         <NavLink to="/" className="logo">
           Nanny.Services
         </NavLink>
@@ -57,12 +58,12 @@ function Layout() {
 
           {isLoggedIn ? (
             <UserBlock>
-              <UserName>
+              <UserContainer>
                 <UserIconContainer>
                   <UserIcon icon="mdi:account" />
                 </UserIconContainer>
-                {user?.displayName ?? 'User'}
-              </UserName>
+                <UserName>{user?.displayName ?? 'User'}</UserName>
+              </UserContainer>
               <AuthBtn
                 $isHome={isHome}
                 onClick={logOut}
@@ -84,7 +85,7 @@ function Layout() {
                 $isHome={isHome}
                 onClick={toggleRegistrationModal}
                 title="Registration"
-                paddingX={39}
+                paddingX={38}
               />
             </AuthBlock>
           )}

@@ -13,7 +13,7 @@ export const NannyReview = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${clampBuilder(8, 16)};
-  margin-bottom: ${clampBuilder(8, 25)};
+  margin-bottom: ${clampBuilder(12, 25)};
 
   &:last-of-type {
     margin-bottom: ${clampBuilder(12, 48)};
@@ -35,9 +35,9 @@ export const ReviewAuthorAvatar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: ${clampBuilder(8, 44)};
-  height: ${clampBuilder(8, 44)};
-  font-size: ${clampBuilder(4, 20)};
+  width: ${clampBuilder(26, 44)};
+  height: ${clampBuilder(26, 44)};
+  font-size: ${clampBuilder(16, 20)};
   font-weight: 500;
   line-height: 1;
   color: var(--accent-color);
@@ -46,7 +46,7 @@ export const ReviewAuthorAvatar = styled.div`
 `;
 
 export const ReviewAuthorName = styled.span`
-  font-size: ${clampBuilder(8, 16)};
+  font-size: ${clampBuilder(10, 16)};
   font-weight: 500;
   line-height: 1.25;
   color: var(--dark-text-color);
@@ -55,14 +55,14 @@ export const ReviewAuthorName = styled.span`
 export const ReviewRating = styled.div`
   display: flex;
   gap: ${clampBuilder(4, 8)};
-  font-size: ${clampBuilder(4, 14)};
+  font-size: ${clampBuilder(8, 14)};
   font-weight: 500;
   line-height: 1.2;
   color: var(--dark-text-color);
 `;
 
 export const ReviewComment = styled.p`
-  font-size: ${clampBuilder(8, 16)};
+  font-size: ${clampBuilder(10, 16)};
   font-weight: 400;
   line-height: 1.25;
   color: var(--grey-text-color-transp);

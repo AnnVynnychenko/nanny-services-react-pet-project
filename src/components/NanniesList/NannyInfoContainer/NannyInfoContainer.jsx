@@ -40,7 +40,7 @@ function NannyInfoContainer({ dataObj = {} }) {
 
     return (
       <NannyExtraInfo key={key}>
-        <NannyExtraInfoTitle>{formattedLabel}: </NannyExtraInfoTitle>
+        <NannyExtraInfoTitle>{formattedLabel}:</NannyExtraInfoTitle>
         <NannyExtraInfoValue>{displayValue}</NannyExtraInfoValue>
       </NannyExtraInfo>
     );

@@ -1,9 +1,10 @@
 import styled, { css } from 'styled-components';
 import { Icon } from '@iconify/react';
 import { clampBuilder } from '../../../helpers/clampBuilder';
+import { media } from '../../../styles/breakPoints';
 
 const commonTextStyle = css`
-  font-size: ${clampBuilder(8, 16)};
+  font-size: ${clampBuilder(10, 16)};
   font-weight: 500;
   line-height: 1.5;
   color: var(--dark-text-color);
@@ -12,8 +13,8 @@ const commonTextStyle = css`
 export const NannyCardContainer = styled.li`
   display: flex;
   gap: ${clampBuilder(8, 24)};
-  max-width: ${clampBuilder(264, 1184)};
-  padding: ${clampBuilder(8, 24)};
+  max-width: 100%;
+  padding: ${clampBuilder(12, 24)};
   border-radius: ${clampBuilder(8, 24)};
   background-color: var(--light-color);
 `;
@@ -60,6 +61,7 @@ export const NannyInfoBar = styled.div`
   justify-content: space-between;
   gap: 8px;
   width: 100%;
+  margin-bottom: ${clampBuilder(4, 8)};
 `;
 
 export const CardName = styled.h2`
@@ -70,7 +72,13 @@ export const CardName = styled.h2`
 export const NannyInfoBarContainer = styled.div`
   display: flex;
   gap: ${clampBuilder(4, 16)};
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
+
+  ${media.tablet} {
+    flex-direction: row;
+    align-items: center;
+  }
 `;
 
 export const NannyContentWrapper = styled.div`
@@ -102,8 +110,8 @@ export const NannyInfoGroup = styled.div`
 `;
 
 export const IconMapPin = styled(Icon)`
-  width: ${clampBuilder(8, 16)};
-  height: ${clampBuilder(8, 16)};
+  width: ${clampBuilder(10, 16)};
+  height: ${clampBuilder(10, 16)};
   color: var(--dark-text-color);
 `;
 
@@ -159,9 +167,13 @@ export const IconLikeEmpty = styled(Icon)`
 
 export const NannyHeaderRight = styled.div`
   display: flex;
-  align-items: center;
+  align-items: start;
   flex-shrink: 0;
   gap: ${clampBuilder(16, 48)};
+
+  ${media.tablet} {
+    align-items: center;
+  }
 `;
 
 export const NannyName = styled.div`
@@ -190,7 +202,7 @@ export const NannyAboutWrapper = styled.p`
           margin-bottom: ${clampBuilder(8, 14)};
         `}
 
-  font-size: ${clampBuilder(8, 16)};
+  font-size: ${clampBuilder(10, 16)};
   font-weight: 400;
   line-height: 1.25;
   color: var(--grey-text-color-transp);

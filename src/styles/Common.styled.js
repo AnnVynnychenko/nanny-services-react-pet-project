@@ -7,6 +7,6 @@ export const Container = styled.div`
   min-height: calc(100vh - 89px);
   max-width: ${breakpoints.desktop};
   margin: 0 auto;
-  padding: ${clampBuilder(12, 64)} ${clampBuilder(28, 128)};
+  padding: ${clampBuilder(12, 64)} ${clampBuilder(16, 128)};
   background-color: var(--background-color);
 `;

@@ -5,14 +5,14 @@ import { clampBuilder } from '../../../helpers/clampBuilder';
 export const FilterSelectWrapper = styled.div`
   position: relative;
   width: 100%;
-  max-width: 226px;
+  max-width: ${clampBuilder(140, 226)};
 `;
 
 export const customFilterSelectStyles = {
   control: provided => ({
     ...provided,
     minHeight: 'auto',
-    padding: `${clampBuilder(4, 14)} ${clampBuilder(8, 18)}`,
+    padding: `${clampBuilder(8, 14)} ${clampBuilder(12, 18)}`,
     borderRadius: clampBuilder(8, 14),
     backgroundColor: 'var(--accent-color)',
     border: 'none',
@@ -39,7 +39,7 @@ export const customFilterSelectStyles = {
     marginBottom: clampBuilder(8, 12),
     paddingTop: '0',
     paddingBottom: '0',
-    fontSize: clampBuilder(8, 18),
+    fontSize: clampBuilder(12, 18),
     fontWeight: '400',
     lineHeight: '1.1',
     backgroundColor: 'transparent',
@@ -58,7 +58,7 @@ export const customFilterSelectStyles = {
     ...provided,
     margin: 0,
     padding: 0,
-    fontSize: clampBuilder(8, 18),
+    fontSize: clampBuilder(12, 18),
     fontWeight: '500',
     lineHeight: '1.11',
     color: 'var(--light-color)',
@@ -84,11 +84,11 @@ export const customFilterSelectStyles = {
 
 export const IconArrowDown = styled(Icon)`
   position: absolute;
-  right: ${clampBuilder(8, 18)};
+  right: ${clampBuilder(12, 18)};
   top: 50%;
   transform: translateY(-50%);
-  width: ${clampBuilder(8, 16)};
-  height: ${clampBuilder(8, 16)};
+  width: ${clampBuilder(12, 16)};
+  height: ${clampBuilder(12, 16)};
   pointer-events: none;
   color: var(--white-color);
 `;

@@ -9,7 +9,7 @@ export const FilterWrapper = styled.div`
 `;
 
 export const Title = styled.span`
-  font-size: ${clampBuilder(8, 14)};
+  font-size: ${clampBuilder(12, 14)};
   font-weight: 500;
   line-height: 1.2;
   color: var(--grey-text-color);

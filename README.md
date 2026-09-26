@@ -54,6 +54,8 @@ nannies, featuring Firebase authentication and personalized dynamic storage.
   `useSearchParams` for shareable and stateful links.
 - **Protected Routes:** Restricted access to the `Favorites` page for
   authenticated users.
+- **Responsive & Fluid Design:** Сross-viewport compatible layout
+  (320px-768px-1440px) built using custom breakpoints and fluid CSS clamp()
 
 ## 🛠️ Getting Started
 

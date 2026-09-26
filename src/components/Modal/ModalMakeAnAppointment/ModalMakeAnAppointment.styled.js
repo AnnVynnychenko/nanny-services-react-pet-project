@@ -8,20 +8,25 @@ import {
   commonSubmitBtnStyles,
 } from '../commonFormFieldsStyles.styled';
 import { clampBuilder } from '../../../helpers/clampBuilder';
+import { media } from '../../../styles/breakPoints';
 
 export const ModalAppointmentWrapper = styled(ModalContainer)`
-  max-width: ${clampBuilder(136, 600)};
+  max-width: calc(100% - 36px);
+
+  ${media.tablet} {
+    max-width: 600px;
+  }
 `;
 
 export const NannyWrapper = styled.figure`
   display: flex;
-  gap: ${clampBuilder(4, 14)};
+  gap: ${clampBuilder(8, 14)};
 `;
 
 export const NannyAvatar = styled.img`
-  width: ${clampBuilder(12, 44)};
-  height: ${clampBuilder(12, 44)};
-  border-radius: ${clampBuilder(4, 15)};
+  width: ${clampBuilder(32, 44)};
+  height: ${clampBuilder(32, 44)};
+  border-radius: ${clampBuilder(8, 15)};
 `;
 
 export const NannyNameWrapper = styled.div`
@@ -32,7 +37,7 @@ export const NannyNameWrapper = styled.div`
 `;
 
 export const Nanny = styled.span`
-  font-size: ${clampBuilder(8, 12)};
+  font-size: ${clampBuilder(10, 12)};
   font-weight: 500;
   line-height: 1.3;
   color: var(--grey-text-color);
@@ -48,7 +53,7 @@ export const NannyName = styled.figcaption`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: ${clampBuilder(4, 16)};
+  gap: ${clampBuilder(8, 16)};
 `;
 
 export const FieldWrapper = styled.div`

@@ -7,7 +7,7 @@ export const SelectHeader = styled.p`
   padding-top: ${clampBuilder(8, 16)};
   padding-left: ${clampBuilder(4, 8)};
   padding-right: ${clampBuilder(4, 8)};
-  font-size: ${clampBuilder(8, 16)};
+  font-size: ${clampBuilder(10, 16)};
   font-weight: 500;
   line-height: 1.5;
   color: var(--dark-text-color);

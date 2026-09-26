@@ -23,8 +23,8 @@ export const AvatarFigure = styled.figure`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${clampBuilder(28, 120)};
-  height: ${clampBuilder(28, 120)};
+  width: ${clampBuilder(46, 120)};
+  height: ${clampBuilder(46, 120)};
   margin: 0;
   padding: ${clampBuilder(3, 12)};
   border: 2px solid var(--accent-transparent);
@@ -33,13 +33,13 @@ export const AvatarFigure = styled.figure`
 
 export const WrapperAvatar = styled.div`
   position: relative;
-  width: ${clampBuilder(20, 96)};
-  height: ${clampBuilder(20, 96)};
+  width: ${clampBuilder(36, 96)};
+  height: ${clampBuilder(36, 96)};
 `;
 
 export const NannyAvatar = styled.img`
-  width: ${clampBuilder(20, 96)};
-  height: ${clampBuilder(20, 96)};
+  width: ${clampBuilder(36, 96)};
+  height: ${clampBuilder(36, 96)};
   border-radius: ${clampBuilder(4, 15)};
 `;
 

@@ -9,7 +9,7 @@ const commonTextStyle = css`
 
 export const NannyExtraInfo = styled.span`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: ${clampBuilder(2, 4)};
   padding: 8px ${clampBuilder(8, 16)};
   border-radius: ${clampBuilder(8, 24)};

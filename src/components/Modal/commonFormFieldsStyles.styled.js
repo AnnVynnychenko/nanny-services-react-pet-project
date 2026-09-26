@@ -3,10 +3,10 @@ import { clampBuilder } from '../../helpers/clampBuilder';
 
 export const commonFormFieldsStyles = css`
   width: 100%;
-  padding: ${clampBuilder(4, 16)} ${clampBuilder(8, 18)};
+  padding: ${clampBuilder(8, 16)} ${clampBuilder(12, 18)};
   border: 1px solid var(--border-color);
-  border-radius: ${clampBuilder(4, 12)};
-  font-size: ${clampBuilder(8, 16)};
+  border-radius: ${clampBuilder(8, 12)};
+  font-size: ${clampBuilder(12, 16)};
   font-weight: 500;
   line-height: 1.25;
   transition: var(--transition-thumb);
@@ -15,7 +15,7 @@ export const commonFormFieldsStyles = css`
     $hasRightIcon && `padding-right: ${clampBuilder(20, 40)};`}
 
   &::placeholder {
-    font-size: ${clampBuilder(8, 16)};
+    font-size: ${clampBuilder(12, 16)};
     font-weight: 400;
     line-height: 1.25;
     color: var(--dark-text-color);

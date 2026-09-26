@@ -11,7 +11,8 @@ import { clampBuilder } from '../../../helpers/clampBuilder';
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: ${clampBuilder(4, 18)};
+  gap: ${clampBuilder(8, 18)};
+  line-height: 1;
 `;
 
 export const Input = styled.input`
@@ -24,7 +25,7 @@ export const ErrorMessage = styled.p`
 
 export const SubmitBtn = styled(CommonBtn)`
   ${commonSubmitBtnStyles}
-  margin-top: ${clampBuilder(4, 22)};
+  margin-top: ${clampBuilder(8, 22)};
 `;
 
 export const FieldWrapper = styled.div`

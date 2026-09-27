@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import toast from 'react-hot-toast';
 import { useScrollLock } from '../../../hooks/useScrollLock';
 import { useEscapeClose } from '../../../hooks/useEscapeClose';
 import ModalBackdrop from '../ModalBackdrop';
@@ -42,10 +43,16 @@ function ModalRegistration({ onClose }) {
   async function submitData(data) {
     const { email, password, name } = data;
     try {
-      await registerUser(email, password, name);
+      const user = await registerUser(email, password, name);
+
+      toast.success(
+        `Welcome ${user.displayName}! Your account has been created.`
+      );
+
       reset();
       onClose?.();
     } catch (err) {
+      toast.error(err.message);
       console.error('Registration failed:', err.message);
     }
   }

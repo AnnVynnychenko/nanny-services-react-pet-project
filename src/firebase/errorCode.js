@@ -2,7 +2,6 @@ export const getFirebaseErrorMessage = errorCode => {
   switch (errorCode) {
     case 'auth/email-already-in-use':
       return 'This email is already registered. Please log in instead.';
-    case 'auth/wrong-password':
     case 'auth/invalid-credential':
       return 'Invalid email or password. Please try again.';
     case 'auth/user-not-found':

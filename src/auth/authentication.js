@@ -3,9 +3,15 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from 'firebase/auth';
-import toast from 'react-hot-toast';
 import { authFirebase } from '../firebase/config';
 import { getFirebaseErrorMessage } from '../firebase/errorCode';
+
+const handleAuthError = err => {
+  const friendlyMessage = getFirebaseErrorMessage(
+    err?.code || err || 'auth/unknown-error'
+  );
+  throw new Error(friendlyMessage);
+};
 
 export const registerUser = async (email, password, name) => {
   try {
@@ -14,19 +20,16 @@ export const registerUser = async (email, password, name) => {
       email,
       password
     );
+
     const user = userCredential.user;
 
     await updateProfile(user, {
       displayName: name,
     });
 
-    toast.success(`Welcome ${name}! Your account has been created.`);
-
-    return user;
-  } catch (error) {
-    const friendlyMessage = getFirebaseErrorMessage(error.code);
-    toast.error(friendlyMessage);
-    throw new Error(friendlyMessage);
+    return authFirebase.currentUser;
+  } catch (err) {
+    handleAuthError(err);
   }
 };
 
@@ -39,11 +42,8 @@ export const logInUser = async (email, password) => {
     );
     const user = userCredential.user;
 
-    toast.success(`Welcome back, ${user.displayName || 'User'}!`);
     return user;
   } catch (err) {
-    const friendlyMessage = getFirebaseErrorMessage(err.code);
-    toast.error(friendlyMessage);
-    throw err;
+    handleAuthError(err);
   }
 };

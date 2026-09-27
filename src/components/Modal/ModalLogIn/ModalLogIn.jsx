@@ -16,6 +16,8 @@ import { logInYapSchema } from '../../../yup/logInYapSchema';
 import { logInUser } from '../../../auth/authentication';
 import EyeIconBtn from '../../Buttons/EyeIconBtn/EyeIconBtn';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { getFirebaseErrorMessage } from '../../../firebase/errorCode';
 
 const modalLogInRoot = document.getElementById('modal-root');
 
@@ -41,10 +43,12 @@ function ModalLogIn({ onClose }) {
   async function submitData(data) {
     const { email, password } = data;
     try {
-      await logInUser(email, password);
+      const user = await logInUser(email, password);
+      toast.success(`Welcome back, ${user.displayName || 'User'}!`);
       reset();
       onClose?.();
     } catch (err) {
+      toast.error(err.message);
       console.error('Log in failed:', err.message);
     }
   }

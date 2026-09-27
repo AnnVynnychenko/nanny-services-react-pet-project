@@ -8,9 +8,9 @@ function EyeIconBtn({ showPassword = false, togglePasswordVisibility }) {
       aria-label={showPassword ? 'Hide password' : 'Show password'}
     >
       {showPassword ? (
-        <EyeIcon icon="meteor-icons:eye" />
-      ) : (
         <EyeIcon icon="meteor-icons:eye-off" />
+      ) : (
+        <EyeIcon icon="meteor-icons:eye" />
       )}
     </EyeBtn>
   );

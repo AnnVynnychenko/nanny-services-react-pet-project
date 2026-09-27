@@ -12,7 +12,7 @@ export const commonFormFieldsStyles = css`
   transition: var(--transition-thumb);
 
   ${({ $hasRightIcon }) =>
-    $hasRightIcon && `padding-right: ${clampBuilder(20, 40)};`}
+    $hasRightIcon && `padding-right: ${clampBuilder(24, 44)};`}
 
   &::placeholder {
     font-size: ${clampBuilder(12, 16)};

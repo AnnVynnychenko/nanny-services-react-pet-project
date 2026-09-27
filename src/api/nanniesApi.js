@@ -9,36 +9,46 @@ import {
   startAfter,
 } from 'firebase/database';
 import { dbFirebase } from '../firebase/config';
+import { FILTER_OPTIONS, FIREBASE_INDEX_ON } from '../data/filterDefaultParam';
 
 const nanniesRef = ref(dbFirebase, 'nannies');
 
+const {
+  A_TO_Z,
+  Z_TO_A,
+  LESS_THAN_10,
+  GREATER_THAN_10,
+  POPULAR,
+  NOT_POPULAR,
+  SHOW_ALL,
+} = FILTER_OPTIONS;
+
+const { NAME, PRICE_PER_HOUR, RATING } = FIREBASE_INDEX_ON;
+
 export const buildFirebaseQuery = (filter, limit) => {
-  switch (filter) {
-    case 'A to Z':
-      return query(nanniesRef, orderByChild('name'), limitToFirst(limit));
-    case 'Z to A':
-      return query(nanniesRef, orderByChild('name'), limitToLast(limit));
-    case 'Less than 10$':
-      return query(
-        nanniesRef,
-        orderByChild('price_per_hour'),
-        endAt(10),
-        limitToFirst(limit)
-      );
-    case 'Greater than 10$':
-      return query(
-        nanniesRef,
-        orderByChild('price_per_hour'),
-        startAfter(10),
-        limitToFirst(limit)
-      );
-    case 'Popular':
-      return query(nanniesRef, orderByChild('rating'), limitToLast(limit));
-    case 'Not popular':
-      return query(nanniesRef, orderByChild('rating'), limitToFirst(limit));
-    case 'Show all':
-      return query(nanniesRef, orderByKey(), limitToFirst(limit));
-    default:
-      return query(nanniesRef, limitToFirst(limit));
-  }
+  const getFilterRules = () => {
+    switch (filter) {
+      case A_TO_Z:
+        return [orderByChild(NAME), limitToFirst(limit)];
+      case Z_TO_A:
+        return [orderByChild(NAME), limitToLast(limit)];
+      case LESS_THAN_10:
+        return [orderByChild(PRICE_PER_HOUR), endAt(10), limitToFirst(limit)];
+      case GREATER_THAN_10:
+        return [
+          orderByChild(PRICE_PER_HOUR),
+          startAfter(10),
+          limitToFirst(limit),
+        ];
+      case POPULAR:
+        return [orderByChild(RATING), limitToLast(limit)];
+      case NOT_POPULAR:
+        return [orderByChild(RATING), limitToFirst(limit)];
+      case SHOW_ALL:
+        return [orderByKey(), limitToFirst(limit)];
+      default:
+        return [limitToFirst(limit)];
+    }
+  };
+  return query(nanniesRef, ...getFilterRules());
 };

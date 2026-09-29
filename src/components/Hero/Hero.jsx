@@ -12,10 +12,10 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 function Hero() {
-  const navigateOnNanniesPage = useNavigate();
+  const navigate = useNavigate();
 
   function handleGetStartedClick() {
-    navigateOnNanniesPage('/nannies');
+    navigate('/nannies');
   }
 
   return (

@@ -12,6 +12,7 @@ export const GlobalStyles = createGlobalStyle`
     --grey-text-color: #8A8A89;
     --gold-color: #FFC531;
     --error-color: #e74c3c;
+    --light-transp-color: rgba(251, 251, 251, 0.4);
     --accent-transparent: rgba(240, 63, 59, 0.2);
     --grey-text-color-transp: rgba(17, 16, 28, 0.5);
     --grey-border-color: rgba(17, 16, 28, 0.2);

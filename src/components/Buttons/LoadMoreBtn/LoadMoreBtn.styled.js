@@ -6,6 +6,7 @@ export const LoadMoreButton = styled(BaseButtonStyles)`
   margin-top: ${clampBuilder(16, 64)};
   margin-left: auto;
   margin-right: auto;
+
   line-height: 1.25;
 
   &:hover,

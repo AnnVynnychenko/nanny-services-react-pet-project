@@ -66,7 +66,7 @@ export const Header = styled.header`
     $isHome &&
     css`
       border-radius: ${clampBuilder(20, 30)} ${clampBuilder(20, 30)} 0 0;
-      border-bottom: 1px solid var(--light-color);
+      border-bottom: 1px solid var(--light-transp-color);
       overflow: hidden;
     `};
 
@@ -170,7 +170,7 @@ export const RegistrationBtn = styled(BaseButtonStyles)`
 
 export const AuthBtn = styled(BaseButtonStyles)`
   line-height: 1.25;
-  border: 1px solid var(--light-color);
+  border: 1px solid var(--light-transp-color);
   background-color: transparent;
 `;
 

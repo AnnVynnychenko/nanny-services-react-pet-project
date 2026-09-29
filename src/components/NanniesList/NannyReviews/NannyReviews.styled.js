@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { clampBuilder } from '../../../helpers/clampBuilder';
-import { CommonBtn } from '../../Buttons/Buttons';
+import { BaseButtonStyles } from '../../Buttons/BaseBtn.styled';
 
 export const NannyReviewsContainer = styled.div`
   max-width: ${clampBuilder(264, 1184)};
@@ -68,13 +68,11 @@ export const ReviewComment = styled.p`
   color: var(--grey-text-color-transp);
 `;
 
-export const AppointmentBtn = styled(CommonBtn)`
-  border: 1px solid transparent;
-
+export const MakeAnAppointmentBtn = styled(BaseButtonStyles)`
   &:hover,
   &:focus-visible {
     color: var(--accent-color);
-    background-color: var(--white-color);
+    background-color: var(--light-color);
     border-color: var(--accent-color);
   }
 `;

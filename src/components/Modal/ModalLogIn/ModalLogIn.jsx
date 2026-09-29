@@ -17,7 +17,6 @@ import { logInUser } from '../../../auth/authentication';
 import EyeIconBtn from '../../Buttons/EyeIconBtn/EyeIconBtn';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { getFirebaseErrorMessage } from '../../../firebase/errorCode';
 
 const modalLogInRoot = document.getElementById('modal-root');
 
@@ -91,7 +90,9 @@ function ModalLogIn({ onClose }) {
               <ErrorMessage>{errors.password.message}</ErrorMessage>
             )}
           </FieldWrapper>
-          <SubmitBtn type="submit" title="Log In" paddingX={18} />
+          <SubmitBtn type="submit" paddingX={18} $paddingY={18}>
+            Log In
+          </SubmitBtn>
         </Form>
       </ModalContainer>
     </ModalBackdrop>,

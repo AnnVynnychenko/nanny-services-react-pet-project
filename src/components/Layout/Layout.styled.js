@@ -4,7 +4,7 @@ import { clampBuilder } from '../../helpers/clampBuilder';
 import heroImg from '../../assets/images/homeBgImg.jpg';
 import { breakpoints } from '../../styles/breakPoints';
 import { media } from '../../styles/breakPoints';
-import { CommonBtn, SessionBtn } from '../Buttons';
+import { BaseButtonStyles } from '../Buttons/BaseBtn.styled';
 
 const flexCenter = css`
   display: flex;
@@ -153,43 +153,25 @@ export const AuthBlock = styled.div`
   }
 `;
 
-export const RegistrationBtn = styled(CommonBtn)`
+export const RegistrationBtn = styled(BaseButtonStyles)`
+  line-height: 1.25;
+  border: 1px solid var(--light-color);
+  background-color: transparent;
+
   ${({ $isHome }) =>
-    $isHome
-      ? css`
-          background-color: var(--light-color);
-          color: var(--accent-color);
-          border: 1px solid var(--accent-color);
-
-          ${media.tablet} {
-            background-color: var(--accent-color);
-            color: var(--light-color);
-          }
-        `
-      : css`
-          background-color: var(--light-color);
-          color: var(--accent-color);
-          border: 1px solid var(--light-color);
-
-          &:hover,
-          &:focus-visible {
-            color: var(--accent-color);
-            background-color: var(--hover-accent-light);
-          }
-        `}
-`;
-
-export const AuthBtn = styled(SessionBtn)`
-  ${({ $isHome }) =>
-    $isHome === false &&
+    $isHome &&
     css`
-      &:hover,
-      &:focus-visible {
-        color: var(--accent-color);
-        background-color: var(--light-color);
-        border: 1px solid transparent;
+      ${media.tablet} {
+        background-color: var(--accent-color);
+        border: 1px solid var(--accent-color);
       }
     `}
+`;
+
+export const AuthBtn = styled(BaseButtonStyles)`
+  line-height: 1.25;
+  border: 1px solid var(--light-color);
+  background-color: transparent;
 `;
 
 export const UserBlock = styled.div`

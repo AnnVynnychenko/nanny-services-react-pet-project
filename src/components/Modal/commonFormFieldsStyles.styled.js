@@ -41,13 +41,11 @@ export const commonErrorMessageStyles = css`
 
 export const commonSubmitBtnStyles = css`
   width: 100%;
-  margin-top: ${clampBuilder(8, 24)};
-  border: 1px solid transparent;
 
   &:hover,
   &:focus-visible {
     color: var(--accent-color);
-    background-color: var(--white-color);
+    background-color: var(--light-color);
     border-color: var(--accent-color);
   }
 `;

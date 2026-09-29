@@ -1,13 +1,16 @@
 import { LoadMoreButton } from './LoadMoreBtn.styled';
 
-function LoadMoreBtn({ onClick, ...rest }) {
+function LoadMoreBtn({ onClick, ...restProps }) {
   return (
     <LoadMoreButton
-      title="Load more"
-      paddingX={40}
+      type="button"
+      $paddingX={38}
+      $paddingY={14}
       onClick={onClick}
-      {...rest}
-    />
+      {...restProps}
+    >
+      Load more
+    </LoadMoreButton>
   );
 }
 

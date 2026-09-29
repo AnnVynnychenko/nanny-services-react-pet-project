@@ -24,11 +24,12 @@ function Hero() {
         <HeroTitle>Make Life Easier for the Family:</HeroTitle>
         <HeroText>Find Babysitters Online for All Occasions</HeroText>
         <GetStartedBtn
-          title="Get started"
-          paddingX={46}
-          paddingY={16}
+          type="button"
+          $paddingX={46}
+          $paddingY={18}
           onClick={handleGetStartedClick}
         >
+          Get started
           <ArrowIconWrapper>
             <ArrowIcon icon="ci:arrow-up-right-lg" className="default-icon" />
             <ArrowIcon icon="ci:arrow-right-lg" className="hover-icon" />

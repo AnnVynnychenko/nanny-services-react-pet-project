@@ -5,7 +5,7 @@ import {
   commonFormFieldsStyles,
   commonSubmitBtnStyles,
 } from '../commonFormFieldsStyles.styled';
-import { CommonBtn } from '../../Buttons/Buttons';
+import { BaseButtonStyles } from '../../Buttons/BaseBtn.styled';
 import { clampBuilder } from '../../../helpers/clampBuilder';
 
 export const Form = styled.form`
@@ -23,7 +23,7 @@ export const ErrorMessage = styled.p`
   ${commonErrorMessageStyles}
 `;
 
-export const SubmitBtn = styled(CommonBtn)`
+export const SubmitBtn = styled(BaseButtonStyles)`
   ${commonSubmitBtnStyles}
   margin-top: ${clampBuilder(8, 22)};
 `;

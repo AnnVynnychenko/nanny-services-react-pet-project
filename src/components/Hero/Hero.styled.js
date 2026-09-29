@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react';
 import styled from 'styled-components';
 import { clampBuilder } from '../../helpers/clampBuilder';
-import { SessionBtn } from '../Buttons';
+import { BaseButtonStyles } from '../Buttons/BaseBtn.styled';
 import { media } from '../../styles/breakPoints';
 
 export const HeroSection = styled.section`
@@ -48,15 +48,16 @@ export const HeroText = styled.p`
   color: var(--light-color);
 `;
 
-export const GetStartedBtn = styled(SessionBtn)`
+export const GetStartedBtn = styled(BaseButtonStyles)`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: ${clampBuilder(4, 18)};
-  font-size: ${clampBuilder(12, 18)};
-  transition:
-    color var(--transition-thumb),
-    background-color var(--transition-thumb);
+  gap: ${clampBuilder(4, 16)};
+  padding-right: ${clampBuilder(12, 38)};
+  font-size: ${clampBuilder(12, 20)};
+  line-height: 1.2;
+  border: 1px solid var(--light-color);
+  transition: var(--transition-thumb);
 `;
 
 export const ArrowIconWrapper = styled.span`

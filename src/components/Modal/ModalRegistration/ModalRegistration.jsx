@@ -99,7 +99,9 @@ function ModalRegistration({ onClose }) {
               <ErrorMessage>{errors.password.message}</ErrorMessage>
             )}
           </FieldWrapper>
-          <SubmitBtn type="submit" title="Sign Up" paddingX={18} />
+          <SubmitBtn type="submit" $paddingX={18} $paddingY={18}>
+            Sign Up
+          </SubmitBtn>
         </Form>
       </ModalContainer>
     </ModalBackdrop>,

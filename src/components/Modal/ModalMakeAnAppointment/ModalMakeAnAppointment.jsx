@@ -139,7 +139,9 @@ function ModalMakeAnAppointment({ nanny, onClose }) {
           </FieldWrapper>
 
           <Textarea {...register('comment')} placeholder="Comment" rows="3" />
-          <SubmitBtn type="submit" title="Send" paddingX={18} />
+          <SubmitBtn type="submit" $paddingX={18} $paddingY={16}>
+            Send
+          </SubmitBtn>
         </Form>
       </ModalAppointmentWrapper>
     </ModalBackdrop>,

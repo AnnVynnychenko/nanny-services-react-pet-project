@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ModalContainer from '../ModalContainer/ModalContainer';
-import { CommonBtn } from '../../Buttons';
+import { BaseButtonStyles } from '../../Buttons/BaseBtn.styled';
 import {
   commonErrorMessageStyles,
   commonFieldWrapperStyles,
@@ -91,6 +91,8 @@ export const Textarea = styled.textarea`
   resize: none;
 `;
 
-export const SubmitBtn = styled(CommonBtn)`
+export const SubmitBtn = styled(BaseButtonStyles)`
   ${commonSubmitBtnStyles}
+  line-height: 1.25;
+  margin-top: ${clampBuilder(8, 24)};
 `;

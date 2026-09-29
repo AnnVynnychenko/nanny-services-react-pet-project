@@ -65,28 +65,33 @@ function Layout() {
                 <UserName>{user?.displayName ?? 'User'}</UserName>
               </UserContainer>
               <AuthBtn
-                $isHome={isHome}
+                type="button"
                 onClick={logOut}
-                title="Log Out"
-                paddingX={38}
-                paddingY={12}
-              />
+                $paddingX={38}
+                $paddingY={14}
+              >
+                Log Out
+              </AuthBtn>
             </UserBlock>
           ) : (
             <AuthBlock>
               <AuthBtn
-                $isHome={isHome}
+                type="button"
                 onClick={toggleLogInModal}
-                title="Log In"
-                paddingX={38}
-                paddingY={12}
-              />
+                $paddingX={38}
+                $paddingY={14}
+              >
+                Log In
+              </AuthBtn>
               <RegistrationBtn
+                type="button"
                 $isHome={isHome}
                 onClick={toggleRegistrationModal}
-                title="Registration"
-                paddingX={38}
-              />
+                $paddingX={38}
+                $paddingY={14}
+              >
+                Registration
+              </RegistrationBtn>
             </AuthBlock>
           )}
         </RightContainer>

@@ -9,7 +9,7 @@ import {
   ReviewRating,
   ReviewHeader,
   ReviewComment,
-  AppointmentBtn,
+  MakeAnAppointmentBtn,
 } from './NannyReviews.styled';
 import ModalMakeAnAppointment from '../../Modal/ModalMakeAnAppointment';
 import { useToggleModal } from '../../../hooks/useToggleModal';
@@ -38,11 +38,14 @@ function NannyReviews({ nanny }) {
           <ReviewComment>{comment}</ReviewComment>
         </NannyReview>
       ))}
-      <AppointmentBtn
-        title="Make an appointment"
-        paddingX={28}
+      <MakeAnAppointmentBtn
+        type="button"
+        $paddingX={25}
+        $paddingY={12}
         onClick={toggleAppointmentModal}
-      />
+      >
+        Make an appointment
+      </MakeAnAppointmentBtn>
       {showAppointmentModal && (
         <ModalMakeAnAppointment
           onClose={toggleAppointmentModal}

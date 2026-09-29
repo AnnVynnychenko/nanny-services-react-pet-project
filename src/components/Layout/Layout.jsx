@@ -96,17 +96,15 @@ function Layout() {
           )}
         </RightContainer>
       </Header>
-      {isHome ? (
-        <main>
+      <main>
+        {isHome ? (
           <Outlet />
-        </main>
-      ) : (
-        <Container>
-          <main>
+        ) : (
+          <Container>
             <Outlet />
-          </main>
-        </Container>
-      )}
+          </Container>
+        )}
+      </main>
       {showRegistrationModal && (
         <ModalRegistration onClose={toggleRegistrationModal} />
       )}

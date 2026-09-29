@@ -11,6 +11,25 @@ const flexCenter = css`
   align-items: center;
 `;
 
+const commonBtnStyles = css`
+  flex-shrink: 0;
+
+  line-height: 1.25;
+
+  border: 1px solid var(--light-transp-color);
+  background-color: transparent;
+`;
+
+const commonLinkStyles = css`
+  outline: none;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--white-color);
+    text-shadow: var(--text-shadow-hover);
+  }
+`;
+
 const flexResponsive = gapValue => css`
   display: flex;
   flex-direction: column;
@@ -23,15 +42,15 @@ export const HeroWrapper = styled.div`
     $isHome &&
     css`
       max-width: ${breakpoints.desktopHome};
-      margin: 0 auto;
       width: calc(100% - 8px);
-      border-radius: ${clampBuilder(20, 30)};
-      overflow: hidden;
+      margin: 0 auto;
 
+      border-radius: ${clampBuilder(20, 30)};
       background-color: var(--accent-color);
 
+      overflow: hidden;
+
       ${media.tablet} {
-        background-color: var(--accent-color);
         background-image: url(${heroImg});
         background-repeat: no-repeat;
         background-position: right top;
@@ -49,7 +68,7 @@ export const Header = styled.header`
 
   gap: ${({ $isHome, $isLoggedIn }) => {
     if ($isHome) {
-      return $isLoggedIn ? clampBuilder(28, 416) : clampBuilder(20, 474);
+      return $isLoggedIn ? clampBuilder(28, 400) : clampBuilder(20, 458);
     }
     return clampBuilder(28, 305);
   }};
@@ -67,6 +86,7 @@ export const Header = styled.header`
     css`
       border-radius: ${clampBuilder(20, 30)} ${clampBuilder(20, 30)} 0 0;
       border-bottom: 1px solid var(--light-transp-color);
+
       overflow: hidden;
     `};
 
@@ -74,9 +94,11 @@ export const Header = styled.header`
     $isHome ? 'transparent' : 'var(--accent-color)'};
 
   .logo {
-    color: var(--light-color);
+    ${commonLinkStyles}
     font-weight: 500;
     font-size: ${clampBuilder(14, 24)};
+
+    color: var(--light-color);
     white-space: nowrap;
   }
 `;
@@ -91,7 +113,7 @@ export const RightContainer = styled.div`
 `;
 
 export const HeaderNav = styled.ul`
-  ${flexResponsive(clampBuilder(10, 40))}
+  ${flexResponsive(clampBuilder(2, 8))}
 
   ${media.tablet} {
     flex-direction: row;
@@ -103,23 +125,20 @@ export const HeaderNav = styled.ul`
   }
 
   a {
+    ${commonLinkStyles}
+
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
+    padding: ${clampBuilder(8, 12)} ${clampBuilder(10, 16)};
+
     line-height: 1;
 
     color: var(--light-color);
-    font-weight: 400;
     font-size: ${clampBuilder(12, 16)};
     transition: var(--transition-thumb);
-    outline: none;
-
-    &:hover,
-    &:focus-visible {
-      color: var(--white-color);
-      text-shadow: var(--text-shadow-hover);
-    }
 
     &.active {
       color: var(--light-color);
@@ -130,11 +149,13 @@ export const HeaderNav = styled.ul`
           &::after {
             content: '';
             position: absolute;
-            bottom: -4px;
+            bottom: 0px;
             left: 50%;
-            transform: translateX(-50%) translateY(100%);
+            transform: translateX(-50%);
+
             width: 0.5em;
             height: 0.5em;
+
             border-radius: 50%;
             background-color: var(--white-color);
           }
@@ -154,9 +175,7 @@ export const AuthBlock = styled.div`
 `;
 
 export const RegistrationBtn = styled(BaseButtonStyles)`
-  line-height: 1.25;
-  border: 1px solid var(--light-color);
-  background-color: transparent;
+  ${commonBtnStyles}
 
   ${({ $isHome }) =>
     $isHome &&
@@ -169,9 +188,7 @@ export const RegistrationBtn = styled(BaseButtonStyles)`
 `;
 
 export const AuthBtn = styled(BaseButtonStyles)`
-  line-height: 1.25;
-  border: 1px solid var(--light-transp-color);
-  background-color: transparent;
+  ${commonBtnStyles}
 `;
 
 export const UserBlock = styled.div`
@@ -184,16 +201,18 @@ export const UserBlock = styled.div`
   }
 `;
 
-export const UserContainer = styled.span`
+export const UserContainer = styled.div`
   ${flexCenter};
   gap: ${clampBuilder(8, 14)};
 
   min-width: 0;
   max-width: ${clampBuilder(80, 156)};
+  white-space: nowrap;
 
-  color: var(--light-color);
   font-weight: 500;
   font-size: ${clampBuilder(12, 18)};
+
+  color: var(--light-color);
 
   cursor: default;
 `;

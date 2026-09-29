@@ -21,7 +21,7 @@ export const DataContainer = styled.div`
   line-height: 1.25;
 
   ${media.desktop} {
-    max-width: 284px;
+    max-width: 285px;
   }
 `;
 

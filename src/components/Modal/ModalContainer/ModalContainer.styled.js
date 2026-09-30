@@ -32,14 +32,13 @@ export const ModalExplanation = styled.p`
   margin-bottom: ${clampBuilder(16, 40)};
 
   font-size: ${clampBuilder(12, 16)};
-  font-weight: 400;
   line-height: 1.25;
   letter-spacing: -0.03em;
 
   color: var(--grey-text-color-transp);
 `;
 
-export const ModalCloseBtn = styled(Icon)`
+export const ModalCloseBtn = styled.button`
   position: absolute;
   top: ${clampBuilder(16, 28)};
   right: ${clampBuilder(16, 28)};
@@ -53,4 +52,15 @@ export const ModalCloseBtn = styled(Icon)`
 
   color: var(--dark-text-color);
   outline: none;
+
+  &:hover,
+  &:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+  }
+`;
+
+export const IconCloseModal = styled(Icon)`
+  width: 100%;
+  height: 100%;
 `;

@@ -7,13 +7,7 @@ import {
 } from './ModalCustomSelect.styled';
 import CustomMenuList from './CustomMenuList';
 import ModalCustomOption from './ModalCustomOption';
-
-const options = [
-  { value: '09:00', label: '09:00' },
-  { value: '09:30', label: '09:30' },
-  { value: '10:00', label: '10:00' },
-  { value: '10:30', label: '10:30' },
-];
+import { MEETING_TIME_OPTIONS } from '../../../../data/appointmentOptions';
 
 function ModalCustomSelect({ control }) {
   return (
@@ -24,7 +18,7 @@ function ModalCustomSelect({ control }) {
         render={({ field }) => (
           <Select
             {...field}
-            options={options}
+            options={MEETING_TIME_OPTIONS}
             placeholder="00:00"
             styles={customSelectStyles}
             menuPortalTarget={
@@ -34,7 +28,10 @@ function ModalCustomSelect({ control }) {
               MenuList: CustomMenuList,
               Option: ModalCustomOption,
             }}
-            value={options.find(opt => opt.value === field.value) || null}
+            value={
+              MEETING_TIME_OPTIONS.find(opt => opt.value === field.value) ||
+              null
+            }
             onChange={val => field.onChange(val ? val.value : '')}
           />
         )}

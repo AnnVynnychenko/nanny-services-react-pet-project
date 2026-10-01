@@ -6,7 +6,8 @@ import {
 } from './ModalCustomOption.styled';
 
 function ModalCustomOption(props) {
-  const [hours, minutes] = props.label.split(':');
+  const timeLabel = props.label ? props.label.split(':') : [];
+  const [hours, minutes] = timeLabel;
   return (
     <components.Option {...props}>
       <OptionWrapper>

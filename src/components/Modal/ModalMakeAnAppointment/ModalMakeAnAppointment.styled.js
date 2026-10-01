@@ -18,7 +18,7 @@ export const ModalAppointmentWrapper = styled(ModalContainer)`
   }
 `;
 
-export const NannyWrapper = styled.figure`
+export const NannyWrapper = styled.div`
   display: flex;
   gap: ${clampBuilder(8, 14)};
 `;
@@ -26,6 +26,7 @@ export const NannyWrapper = styled.figure`
 export const NannyAvatar = styled.img`
   width: ${clampBuilder(32, 44)};
   height: ${clampBuilder(32, 44)};
+
   border-radius: ${clampBuilder(8, 15)};
 `;
 
@@ -33,6 +34,7 @@ export const NannyNameWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+
   margin-bottom: ${clampBuilder(12, 40)};
 `;
 
@@ -40,13 +42,15 @@ export const Nanny = styled.span`
   font-size: ${clampBuilder(10, 12)};
   font-weight: 500;
   line-height: 1.3;
+
   color: var(--grey-text-color);
 `;
 
-export const NannyName = styled.figcaption`
+export const NannyName = styled.h3`
   font-size: ${clampBuilder(12, 16)};
   font-weight: 500;
   line-height: 1.5;
+
   color: var(--dark-text-color);
 `;
 
@@ -64,6 +68,7 @@ export const DetailsGroup = styled.div`
   display: flex;
   flex-direction: row;
   gap: ${clampBuilder(4, 8)};
+
   width: 100%;
 
   & > ${FieldWrapper} {
@@ -81,11 +86,6 @@ export const Input = styled.input`
   ${commonFormFieldsStyles};
 `;
 
-export const SelectGroup = styled.div`
-  display: flex;
-  ${commonFormFieldsStyles};
-`;
-
 export const Textarea = styled.textarea`
   ${commonFormFieldsStyles};
   resize: none;
@@ -93,6 +93,7 @@ export const Textarea = styled.textarea`
 
 export const SubmitBtn = styled(BaseButtonStyles)`
   ${commonSubmitBtnStyles}
-  line-height: 1.25;
   margin-top: ${clampBuilder(8, 24)};
+
+  line-height: 1.25;
 `;

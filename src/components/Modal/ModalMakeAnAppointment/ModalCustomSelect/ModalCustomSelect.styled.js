@@ -12,8 +12,10 @@ export const IconTime = styled(Icon)`
   right: ${clampBuilder(8, 18)};
   top: 50%;
   transform: translateY(-50%);
+
   width: ${clampBuilder(16, 20)};
   height: ${clampBuilder(16, 20)};
+
   pointer-events: none;
   color: var(--dark-text-color);
 `;
@@ -72,7 +74,6 @@ export const customSelectStyles = {
   placeholder: provided => ({
     ...provided,
     fontSize: clampBuilder(12, 16),
-    fontWeight: 400,
     color: 'var(--dark-text-color)',
     margin: 0,
   }),

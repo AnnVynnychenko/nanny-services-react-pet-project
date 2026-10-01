@@ -2,7 +2,6 @@ import { createPortal } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import toast from 'react-hot-toast';
-import { makeAnAppointmentYapSchema } from '../../../yup/makeAnAppointmentYupSchema';
 import ModalBackdrop from '../ModalBackdrop';
 import { useScrollLock } from '../../../hooks/useScrollLock';
 import { useEscapeClose } from '../../../hooks/useEscapeClose';
@@ -22,28 +21,35 @@ import {
   ErrorMessage,
 } from './ModalMakeAnAppointment.styled';
 import ModalCustomSelect from './ModalCustomSelect';
-
-const modalAppointmentRoot = document.getElementById('modal-root');
+import { APPOINTMENT_CONFIG } from '../../../data/appointmentModalConfig';
 
 function ModalMakeAnAppointment({ nanny, onClose }) {
-  const { avatar_url, name, id } = nanny || {};
+  const {
+    modalRootId,
+    title,
+    explanation,
+    nannyTitle,
+    submitText,
+    submittingText,
+    schema,
+    defaultValues,
+    paddingX,
+    paddingY,
+  } = APPOINTMENT_CONFIG;
+
+  const modalRoot = document.getElementById(modalRootId);
+
+  const { avatar_url = '', name = 'Nanny', id = '' } = nanny || {};
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
     control,
   } = useForm({
-    resolver: yupResolver(makeAnAppointmentYapSchema),
-    defaultValues: {
-      address: '',
-      telephone: '',
-      childAge: '',
-      meetingTime: '',
-      email: '',
-      parentName: '',
-      comment: '',
-    },
+    resolver: yupResolver(schema),
+    defaultValues,
   });
 
   useScrollLock();
@@ -68,37 +74,43 @@ function ModalMakeAnAppointment({ nanny, onClose }) {
     onClose?.();
   }
 
-  if (!modalAppointmentRoot) {
-    console.error("Target container '#modal-root' is not in the DOM.");
+  if (!modalRoot) {
     return null;
   }
 
   return createPortal(
     <ModalBackdrop onClose={onClose}>
       <ModalAppointmentWrapper
-        title="Make an appointment with a babysitter"
-        explanation=" Arranging a meeting with a caregiver for your child is the first step
-          to creating a safe and comfortable environment. Fill out the form
-          below so we can match you with the perfect care partner."
+        title={title}
+        explanation={explanation}
         onClose={onClose}
       >
         <NannyWrapper>
           <NannyAvatar src={avatar_url} alt={name} />
           <NannyNameWrapper>
-            <Nanny>Your nanny</Nanny>
+            <Nanny>{nannyTitle}</Nanny>
             <NannyName>{name}</NannyName>
           </NannyNameWrapper>
         </NannyWrapper>
         <Form onSubmit={handleSubmit(submitData)}>
           <DetailsGroup>
             <FieldWrapper>
-              <Input {...register('address')} placeholder="Address" />
+              <Input
+                {...register('address')}
+                placeholder="Address"
+                autoComplete="street-address"
+              />
               {errors.address && (
                 <ErrorMessage>{errors.address.message}</ErrorMessage>
               )}
             </FieldWrapper>
             <FieldWrapper>
-              <Input type="tel" {...register('telephone')} placeholder="+420" />
+              <Input
+                type="tel"
+                {...register('telephone')}
+                placeholder="+420"
+                autoComplete="tel"
+              />
               {errors.telephone && (
                 <ErrorMessage>{errors.telephone.message}</ErrorMessage>
               )}
@@ -123,7 +135,11 @@ function ModalMakeAnAppointment({ nanny, onClose }) {
             </FieldWrapper>
           </DetailsGroup>
           <FieldWrapper>
-            <Input {...register('email')} placeholder="Email" />
+            <Input
+              {...register('email')}
+              placeholder="Email"
+              autoComplete="email"
+            />
             {errors.email && (
               <ErrorMessage>{errors.email.message}</ErrorMessage>
             )}
@@ -132,6 +148,7 @@ function ModalMakeAnAppointment({ nanny, onClose }) {
             <Input
               {...register('parentName')}
               placeholder="Father's or mother's name"
+              autoComplete="name"
             />
             {errors.parentName && (
               <ErrorMessage>{errors.parentName.message}</ErrorMessage>
@@ -139,13 +156,18 @@ function ModalMakeAnAppointment({ nanny, onClose }) {
           </FieldWrapper>
 
           <Textarea {...register('comment')} placeholder="Comment" rows="3" />
-          <SubmitBtn type="submit" $paddingX={18} $paddingY={16}>
-            Send
+          <SubmitBtn
+            type="submit"
+            $paddingX={paddingX}
+            $paddingY={paddingY}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? submittingText : submitText}
           </SubmitBtn>
         </Form>
       </ModalAppointmentWrapper>
     </ModalBackdrop>,
-    modalAppointmentRoot
+    modalRoot
   );
 }
 

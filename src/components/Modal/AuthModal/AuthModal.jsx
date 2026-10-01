@@ -75,14 +75,22 @@ function AuthModal({ type = 'login', onClose }) {
         <Form onSubmit={handleSubmit(submitData)}>
           {type === 'registration' && (
             <FieldWrapper>
-              <Input {...register('name')} placeholder="Name" />
+              <Input
+                {...register('name')}
+                placeholder="Name"
+                autoComplete="name"
+              />
               {errors.name && (
                 <ErrorMessage>{errors.name.message}</ErrorMessage>
               )}
             </FieldWrapper>
           )}
           <FieldWrapper>
-            <Input {...register('email')} placeholder="Email" />
+            <Input
+              {...register('email')}
+              placeholder="Email"
+              autoComplete="email"
+            />
             {errors.email && (
               <ErrorMessage>{errors.email.message}</ErrorMessage>
             )}
@@ -92,6 +100,9 @@ function AuthModal({ type = 'login', onClose }) {
               {...register('password')}
               placeholder="Password"
               type={showPassword ? 'text' : 'password'}
+              autoComplete={
+                type === 'login' ? 'current-password' : 'new-password'
+              }
               $hasRightIcon
             />
             <EyeIconBtn

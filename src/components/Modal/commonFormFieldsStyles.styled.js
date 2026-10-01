@@ -32,7 +32,6 @@ export const commonErrorMessageStyles = css`
   left: ${clampBuilder(8, 12)};
   top: 2px;
   font-size: ${clampBuilder(8, 10)};
-  font-weight: 400;
   line-height: 1.2;
   color: var(--error-color);
   pointer-events: none;
@@ -47,6 +46,12 @@ export const commonSubmitBtnStyles = css`
     color: var(--accent-color);
     background-color: var(--light-color);
     border-color: var(--accent-color);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
   }
 `;
 

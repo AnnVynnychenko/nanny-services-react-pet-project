@@ -5,50 +5,59 @@ import { useScrollLock } from '../../../hooks/useScrollLock';
 import { useEscapeClose } from '../../../hooks/useEscapeClose';
 import ModalBackdrop from '../ModalBackdrop';
 import ModalContainer from '../ModalContainer';
+import { AUTH_CONFIG } from '../../../auth/authModalConfig';
 import {
   Form,
   Input,
   ErrorMessage,
   SubmitBtn,
   FieldWrapper,
-} from '../ModalRegistration/ModalRegistrationAndLogIn.styled';
-import { logInYapSchema } from '../../../yup/logInYapSchema';
-import { logInUser } from '../../../auth/authentication';
+} from './AuthModal.styled';
 import EyeIconBtn from '../../Buttons/EyeIconBtn/EyeIconBtn';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
-const modalLogInRoot = document.getElementById('modal-root');
-
-function ModalLogIn({ onClose }) {
+function AuthModal({ type = 'login', onClose }) {
   const [showPassword, setShowPassword] = useState(false);
+
+  const config = AUTH_CONFIG[type] || AUTH_CONFIG.login;
+
+  const {
+    modalRootId,
+    title,
+    explanation,
+    submitText,
+    submittingText,
+    schema,
+    defaultValues,
+    action,
+    paddingY,
+    paddingX,
+  } = config;
+
+  const modalRoot = document.getElementById(modalRootId);
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
   } = useForm({
-    resolver: yupResolver(logInYapSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+    resolver: yupResolver(schema),
+    defaultValues,
   });
 
   useScrollLock();
   useEscapeClose(onClose);
 
   async function submitData(data) {
-    const { email, password } = data;
     try {
-      const user = await logInUser(email, password);
-      toast.success(`Welcome back, ${user.displayName || 'User'}!`);
+      const successMessage = await action(data);
+      toast.success(successMessage);
       reset();
       onClose?.();
     } catch (err) {
-      toast.error(err.message);
-      console.error('Log in failed:', err.message);
+      toast.error(err.message || 'Authentication failed');
     }
   }
 
@@ -56,19 +65,22 @@ function ModalLogIn({ onClose }) {
     setShowPassword(prev => !prev);
   }
 
-  if (!modalLogInRoot) {
-    console.error("Target container '#modal-root' is not in the DOM.");
+  if (!modalRoot) {
     return null;
   }
 
   return createPortal(
     <ModalBackdrop onClose={onClose}>
-      <ModalContainer
-        title="Log In"
-        explanation="Welcome back! Please enter your credentials to access your account and continue your babysitter search."
-        onClose={onClose}
-      >
+      <ModalContainer title={title} explanation={explanation} onClose={onClose}>
         <Form onSubmit={handleSubmit(submitData)}>
+          {type === 'registration' && (
+            <FieldWrapper>
+              <Input {...register('name')} placeholder="Name" />
+              {errors.name && (
+                <ErrorMessage>{errors.name.message}</ErrorMessage>
+              )}
+            </FieldWrapper>
+          )}
           <FieldWrapper>
             <Input {...register('email')} placeholder="Email" />
             {errors.email && (
@@ -90,14 +102,19 @@ function ModalLogIn({ onClose }) {
               <ErrorMessage>{errors.password.message}</ErrorMessage>
             )}
           </FieldWrapper>
-          <SubmitBtn type="submit" paddingX={18} $paddingY={18}>
-            Log In
+          <SubmitBtn
+            type="submit"
+            $paddingX={paddingX}
+            $paddingY={paddingY}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? submittingText : submitText}
           </SubmitBtn>
         </Form>
       </ModalContainer>
     </ModalBackdrop>,
-    modalLogInRoot
+    modalRoot
   );
 }
 
-export default ModalLogIn;
+export default AuthModal;

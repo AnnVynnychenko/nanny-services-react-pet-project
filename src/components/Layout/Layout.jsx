@@ -14,24 +14,20 @@ import {
   UserIconContainer,
 } from './Layout.styled';
 import { Container } from '../../styles/Common.styled';
-import { useToggleModal } from '../../hooks/useToggleModal';
-import ModalRegistration from '../Modal/ModalRegistration';
-import ModalLogIn from '../Modal/ModalLogIn';
 import { useAuth } from '../../hooks/useAuth';
+import { useState } from 'react';
+import AuthModal from '../Modal/AuthModal';
 
 function Layout() {
+  const [authModalType, setAuthModalType] = useState(null);
   const location = useLocation();
   const isHome = location.pathname === '/';
 
-  const {
-    isOpen: showRegistrationModal,
-    toggleModal: toggleRegistrationModal,
-  } = useToggleModal(false);
-
-  const { isOpen: showLogInModal, toggleModal: toggleLogInModal } =
-    useToggleModal(false);
-
   const { isLoggedIn, user, logOut } = useAuth();
+
+  function handleCloseModal() {
+    setAuthModalType(null);
+  }
 
   return (
     <HeroWrapper $isHome={isHome}>
@@ -77,7 +73,9 @@ function Layout() {
             <AuthBlock>
               <AuthBtn
                 type="button"
-                onClick={toggleLogInModal}
+                onClick={() => {
+                  setAuthModalType('login');
+                }}
                 $paddingX={38}
                 $paddingY={14}
               >
@@ -86,7 +84,9 @@ function Layout() {
               <RegistrationBtn
                 type="button"
                 $isHome={isHome}
-                onClick={toggleRegistrationModal}
+                onClick={() => {
+                  setAuthModalType('registration');
+                }}
                 $paddingX={38}
                 $paddingY={14}
               >
@@ -105,10 +105,9 @@ function Layout() {
           </Container>
         )}
       </main>
-      {showRegistrationModal && (
-        <ModalRegistration onClose={toggleRegistrationModal} />
+      {authModalType && (
+        <AuthModal type={authModalType} onClose={handleCloseModal} />
       )}
-      {showLogInModal && <ModalLogIn onClose={toggleLogInModal} />}
     </HeroWrapper>
   );
 }

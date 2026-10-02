@@ -1,5 +1,5 @@
 import { getReviewerInitial } from '../../../helpers/getReviewerInitial';
-import IconStar from '../IconStar';
+import { IconStar } from '../IconStar/IconStar.styled';
 import {
   NannyReviewsContainer,
   NannyReview,

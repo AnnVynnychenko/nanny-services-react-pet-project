@@ -10,6 +10,16 @@ const commonTextStyle = css`
   color: var(--dark-text-color);
 `;
 
+const avatarSize = css`
+  width: ${clampBuilder(36, 96)};
+  height: ${clampBuilder(36, 96)};
+`;
+
+const iconFavoriteSize = css`
+  width: ${clampBuilder(18, 26)};
+  height: ${clampBuilder(18, 26)};
+`;
+
 export const NannyCardContainer = styled.li`
   display: flex;
   gap: ${clampBuilder(8, 24)};
@@ -32,14 +42,12 @@ export const AvatarFigure = styled.figure`
 `;
 
 export const WrapperAvatar = styled.div`
+  ${avatarSize};
   position: relative;
-  width: ${clampBuilder(36, 96)};
-  height: ${clampBuilder(36, 96)};
 `;
 
 export const NannyAvatar = styled.img`
-  width: ${clampBuilder(36, 96)};
-  height: ${clampBuilder(36, 96)};
+  ${avatarSize};
   border-radius: ${clampBuilder(4, 15)};
 `;
 
@@ -94,17 +102,19 @@ export const NannyInfoGroup = styled.div`
   position: relative;
 
   &:not(:last-child) {
-    padding-right: ${clampBuilder(8, 16)};
+    ${media.tablet} {
+      padding-right: ${clampBuilder(8, 16)};
 
-    &::after {
-      content: '';
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 0.5px;
-      height: ${clampBuilder(8, 16)};
-      background-color: var(--grey-border-color);
+      &::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0.5px;
+        height: ${clampBuilder(8, 16)};
+        background-color: var(--grey-border-color);
+      }
     }
   }
 `;
@@ -115,7 +125,7 @@ export const IconMapPin = styled(Icon)`
   color: var(--dark-text-color);
 `;
 
-export const NannyAddress = styled.address`
+export const NannyAddress = styled.span`
   ${commonTextStyle}
 `;
 
@@ -133,12 +143,11 @@ export const NannyPrice = styled.div`
 `;
 
 export const FavoriteButton = styled.button`
+  ${iconFavoriteSize}
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: ${clampBuilder(18, 26)};
-  height: ${clampBuilder(18, 26)};
   line-height: 0;
   transition: var(--transition-thumb);
 
@@ -153,15 +162,13 @@ export const FavoriteButton = styled.button`
 `;
 
 export const IconFavorite = styled(Icon)`
-  width: ${clampBuilder(18, 26)};
-  height: ${clampBuilder(18, 26)};
+  ${iconFavoriteSize}
   color: var(--accent-color);
   outline: none;
 `;
 
 export const IconLikeEmpty = styled(Icon)`
-  width: ${clampBuilder(18, 26)};
-  height: ${clampBuilder(18, 26)};
+  ${iconFavoriteSize}
   outline: none;
 `;
 

@@ -28,10 +28,10 @@ import {
 import NannyInfoContainer from '../NannyInfoContainer';
 import NannyReviews from '../NannyReviews';
 import { useAuth } from '../../../hooks/useAuth';
-import IconStar from '../IconStar';
+import { IconStar } from '../IconStar/IconStar.styled';
 import toast from 'react-hot-toast';
 
-function NannyCard({ nanny, isOnline }) {
+function NannyCard({ nanny = {}, isOnline }) {
   const { user, isLoggedIn } = useAuth();
   const uid = user?.uid;
 

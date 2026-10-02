@@ -1,17 +1,10 @@
+import { ORDERED_KEYS } from '../../../data/nannyInfoKeys';
 import { calculateAge } from '../../../helpers/transformBirthdayToAge';
 import {
   NannyExtraInfo,
   NannyExtraInfoTitle,
   NannyExtraInfoValue,
 } from './NannyInfoContainer.styled';
-
-const ORDERED_KEYS = [
-  'birthday',
-  'experience',
-  'kids_age',
-  'characters',
-  'education',
-];
 
 function NannyInfoContainer({ dataObj = {} }) {
   const allKeys = Array.from(
@@ -21,7 +14,14 @@ function NannyInfoContainer({ dataObj = {} }) {
   return allKeys.map(key => {
     const rawValue = dataObj[key];
 
-    if (rawValue === undefined || rawValue === null) return null;
+    if (
+      rawValue === undefined ||
+      rawValue === null ||
+      rawValue === '' ||
+      (Array.isArray(rawValue) && rawValue.length === 0)
+    ) {
+      return null;
+    }
 
     const formattedLabel =
       key === 'birthday'
@@ -34,7 +34,11 @@ function NannyInfoContainer({ dataObj = {} }) {
       displayValue = calculateAge(rawValue);
     } else if (Array.isArray(rawValue)) {
       displayValue = rawValue
-        .map(value => value.charAt(0).toUpperCase() + value.slice(1))
+        .map(val =>
+          typeof val === 'string'
+            ? val.charAt(0).toUpperCase() + val.slice(1)
+            : val
+        )
         .join(', ');
     }
 

@@ -4,20 +4,18 @@ import {
   FilterSelectWrapper,
   IconArrowDown,
 } from './FilterCustomSelect.styled';
+import {
+  DEFAULT_FILTER,
+  FILTER_OPTIONS_SELECT,
+} from '../../../data/filterDefaultParam';
 
-const options = [
-  { value: 'A to Z', label: 'A to Z' },
-  { value: 'Z to A', label: 'Z to A' },
-  { value: 'Less than 10$', label: 'Less than 10$' },
-  { value: 'Greater than 10$', label: 'Greater than 10$' },
-  { value: 'Popular', label: 'Popular' },
-  { value: 'Not popular', label: 'Not popular' },
-  { value: 'Show all', label: 'Show all' },
-];
-
-function FilterCustomSelect({ onFilterChange, activeFilterValue = 'A to Z' }) {
+function FilterCustomSelect({
+  onFilterChange,
+  activeFilterValue = DEFAULT_FILTER,
+}) {
   const selectedOption =
-    options.find(option => option.value === activeFilterValue) || options[0];
+    FILTER_OPTIONS_SELECT.find(option => option.value === activeFilterValue) ||
+    FILTER_OPTIONS_SELECT[0];
 
   function handleChange(option) {
     if (onFilterChange) {
@@ -28,11 +26,8 @@ function FilterCustomSelect({ onFilterChange, activeFilterValue = 'A to Z' }) {
   return (
     <FilterSelectWrapper>
       <Select
-        options={options}
+        options={FILTER_OPTIONS_SELECT}
         styles={customFilterSelectStyles}
-        menuPortalTarget={
-          typeof document !== 'undefined' ? document.body : null
-        }
         isSearchable={false}
         value={selectedOption}
         onChange={handleChange}

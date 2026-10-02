@@ -13,6 +13,7 @@ export const customFilterSelectStyles = {
     ...provided,
     minHeight: 'auto',
     padding: `${clampBuilder(8, 14)} ${clampBuilder(12, 18)}`,
+    paddingRight: clampBuilder(28, 38),
     borderRadius: clampBuilder(8, 14),
     backgroundColor: 'var(--accent-color)',
     border: 'none',
@@ -74,11 +75,6 @@ export const customFilterSelectStyles = {
     ...provided,
     margin: 0,
     padding: 0,
-  }),
-  placeholder: provided => ({
-    ...provided,
-
-    margin: 0,
   }),
 };
 

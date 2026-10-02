@@ -15,3 +15,7 @@ export const FIREBASE_INDEX_ON = {
   PRICE_PER_HOUR: 'price_per_hour',
   RATING: 'rating',
 };
+
+export const FILTER_OPTIONS_SELECT = Object.values(FILTER_OPTIONS).map(
+  option => ({ value: option, label: option })
+);

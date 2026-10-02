@@ -18,7 +18,8 @@ function NannyReviews({ nanny }) {
   const { isOpen: showAppointmentModal, toggleModal: toggleAppointmentModal } =
     useToggleModal(false);
 
-  const { reviews } = nanny;
+  const reviews = nanny?.reviews || [];
+
   return (
     <NannyReviewsContainer>
       {reviews.map(({ reviewer, rating, comment }, index) => (

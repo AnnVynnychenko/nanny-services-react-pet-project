@@ -101,7 +101,7 @@ function NanniesPage() {
         <button type="button"></button>
       </Link>
       <Outlet />
-      {hasMore && (
+      {hasMore && nannies.length > 0 && (
         <LoadMoreBtn onClick={handleLoadMore} disabled={loadingMore} />
       )}
     </section>

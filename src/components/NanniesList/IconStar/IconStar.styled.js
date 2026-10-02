@@ -7,5 +7,6 @@ export const IconStar = styled(Icon).attrs({
 })`
   width: ${clampBuilder(10, 16)};
   height: ${clampBuilder(10, 16)};
+
   color: var(--gold-color);
 `;

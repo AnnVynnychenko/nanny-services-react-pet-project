@@ -4,9 +4,10 @@ import { clampBuilder } from '../../../helpers/clampBuilder';
 import { media } from '../../../styles/breakPoints';
 
 const commonTextStyle = css`
-  font-size: ${clampBuilder(10, 16)};
+  font-size: ${clampBuilder(12, 16)};
   font-weight: 500;
   line-height: 1.5;
+
   color: var(--dark-text-color);
 `;
 
@@ -23,8 +24,10 @@ const iconFavoriteSize = css`
 export const NannyCardContainer = styled.li`
   display: flex;
   gap: ${clampBuilder(8, 24)};
+
   max-width: 100%;
   padding: ${clampBuilder(12, 24)};
+
   border-radius: ${clampBuilder(8, 24)};
   background-color: var(--light-color);
 `;
@@ -33,10 +36,12 @@ export const AvatarFigure = styled.figure`
   display: flex;
   justify-content: center;
   align-items: center;
+
   width: ${clampBuilder(46, 120)};
   height: ${clampBuilder(46, 120)};
   margin: 0;
   padding: ${clampBuilder(3, 12)};
+
   border: 2px solid var(--accent-transparent);
   border-radius: ${clampBuilder(8, 30)};
 `;
@@ -48,6 +53,7 @@ export const WrapperAvatar = styled.div`
 
 export const NannyAvatar = styled.img`
   ${avatarSize};
+
   border-radius: ${clampBuilder(4, 15)};
 `;
 
@@ -56,11 +62,13 @@ export const StatusBadge = styled.div`
   top: -2px;
   right: 2px;
   box-sizing: content-box;
+
   width: ${clampBuilder(4, 9)};
   height: ${clampBuilder(4, 9)};
+
   border-radius: 50%;
-  background-color: var(--online-round-color);
   border: ${clampBuilder(1, 2)} solid var(--light-color);
+  background-color: var(--online-round-color);
 `;
 
 export const NannyInfoBar = styled.div`
@@ -68,12 +76,14 @@ export const NannyInfoBar = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   gap: 8px;
+
   width: 100%;
   margin-bottom: ${clampBuilder(4, 8)};
 `;
 
 export const CardName = styled.h2`
   ${commonTextStyle}
+
   color: var(--grey-text-color);
 `;
 
@@ -90,16 +100,17 @@ export const NannyInfoBarContainer = styled.div`
 `;
 
 export const NannyContentWrapper = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: column;
+
+  width: 100%;
 `;
 
 export const NannyInfoGroup = styled.div`
+  position: relative;
   display: flex;
   gap: ${clampBuilder(4, 8)};
   align-items: center;
-  position: relative;
 
   &:not(:last-child) {
     ${media.tablet} {
@@ -111,8 +122,10 @@ export const NannyInfoGroup = styled.div`
         right: 0;
         top: 50%;
         transform: translateY(-50%);
+
         width: 0.5px;
         height: ${clampBuilder(8, 16)};
+
         background-color: var(--grey-border-color);
       }
     }
@@ -122,6 +135,7 @@ export const NannyInfoGroup = styled.div`
 export const IconMapPin = styled(Icon)`
   width: ${clampBuilder(10, 16)};
   height: ${clampBuilder(10, 16)};
+
   color: var(--dark-text-color);
 `;
 
@@ -144,11 +158,14 @@ export const NannyPrice = styled.div`
 
 export const FavoriteButton = styled.button`
   ${iconFavoriteSize}
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+
   line-height: 0;
+
   transition: var(--transition-thumb);
 
   &:hover,
@@ -163,12 +180,14 @@ export const FavoriteButton = styled.button`
 
 export const IconFavorite = styled(Icon)`
   ${iconFavoriteSize}
+
   color: var(--accent-color);
   outline: none;
 `;
 
 export const IconLikeEmpty = styled(Icon)`
   ${iconFavoriteSize}
+
   outline: none;
 `;
 
@@ -185,9 +204,11 @@ export const NannyHeaderRight = styled.div`
 
 export const NannyName = styled.div`
   margin-bottom: ${clampBuilder(12, 24)};
-  font-size: ${clampBuilder(12, 24)};
+
+  font-size: ${clampBuilder(16, 24)};
   font-weight: 500;
   line-height: 1.5;
+
   color: var(--dark-text-color);
 `;
 
@@ -196,6 +217,7 @@ export const NannyExtraInfoGroup = styled.div`
   flex-wrap: wrap;
   align-self: flex-start;
   gap: ${clampBuilder(4, 8)};
+
   margin-bottom: ${clampBuilder(8, 24)};
 `;
 
@@ -209,18 +231,21 @@ export const NannyAboutWrapper = styled.p`
           margin-bottom: ${clampBuilder(8, 14)};
         `}
 
-  font-size: ${clampBuilder(10, 16)};
+  font-size: ${clampBuilder(12, 16)};
   font-weight: 400;
   line-height: 1.25;
+
   color: var(--grey-text-color-transp);
 `;
 
 export const NannyReadMoreBtn = styled.button`
+  ${commonTextStyle}
+
   align-self: flex-start;
   text-align: left;
-  ${commonTextStyle}
   text-decoration: underline;
   outline: none;
+
   transition:
     color var(--transition-thumb),
     text-decoration var(--transition-thumb),

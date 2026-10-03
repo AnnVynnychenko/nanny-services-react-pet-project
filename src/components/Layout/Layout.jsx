@@ -25,7 +25,7 @@ function Layout() {
   const location = useLocation();
   const isHome = location.pathname === '/';
 
-  const { isLoggedIn, user, logOut } = useAuth();
+  const { isLoggedIn, user, logOut, loading } = useAuth();
 
   function handleCloseModal() {
     setAuthModalType(null);
@@ -54,7 +54,7 @@ function Layout() {
             </HeaderNav>
           </nav>
 
-          {isLoggedIn ? (
+          {loading ? null : isLoggedIn ? (
             <UserBlock>
               <UserContainer>
                 <UserIconContainer>

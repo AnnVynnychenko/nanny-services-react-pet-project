@@ -242,3 +242,10 @@ export const UserName = styled.span`
   white-space: nowrap;
   text-overflow: ellipsis;
 `;
+
+export const MainStyles = styled.main`
+  display: flex;
+  flex-direction: column;
+
+  min-height: calc(100vh - 120px);
+`;

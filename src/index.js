@@ -10,8 +10,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter basename="/nanny-services-react-pet-project">
+      <GlobalStyles />
       <AuthProvider>
-        <GlobalStyles />
         <App />
       </AuthProvider>
     </BrowserRouter>

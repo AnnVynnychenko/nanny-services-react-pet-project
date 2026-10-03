@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { authFirebase } from '../firebase/config';
+import Loader from '../components/Loader';
 
 export const AuthContext = createContext();
 
@@ -28,7 +29,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {loading ? <Loader fullPage /> : children}
     </AuthContext.Provider>
   );
 }

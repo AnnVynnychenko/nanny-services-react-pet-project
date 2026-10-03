@@ -9,6 +9,7 @@ import LoadMoreBtn from '../../components/Buttons/LoadMoreBtn/LoadMoreBtn';
 import { parseSnapshot } from '../../helpers/filtersService';
 import { buildFirebaseQuery } from '../../api/nanniesApi';
 import { DEFAULT_FILTER } from '../../data/filterDefaultParam';
+import Loader from '../../components/Loader';
 
 function NanniesPage() {
   const [nannies, setNannies] = useState([]);
@@ -87,7 +88,6 @@ function NanniesPage() {
     setCardsLimit(CARDS_PER_PAGE);
   }
 
-  if (loading) return <p>Loading nannies list...</p>;
   if (error) return <p>{error}</p>;
 
   return (
@@ -96,7 +96,11 @@ function NanniesPage() {
         onSelectFilter={handleSelectFilter}
         activeFilterValue={activeFilterValue}
       />
-      <NanniesList nannies={nannies} isOnline={isOnline} />
+      {loading ? (
+        <Loader size={40} />
+      ) : (
+        <NanniesList nannies={nannies} isOnline={isOnline} />
+      )}
       {hasMore && nannies.length > 0 && (
         <LoadMoreBtn onClick={handleLoadMore} disabled={loadingMore} />
       )}

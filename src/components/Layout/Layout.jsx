@@ -1,6 +1,7 @@
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import {
   Header,
+  MainStyles,
   HeaderNav,
   AuthBlock,
   UserBlock,
@@ -17,6 +18,7 @@ import { Container } from '../../styles/Common.styled';
 import { useAuth } from '../../hooks/useAuth';
 import { Suspense, useState } from 'react';
 import AuthModal from '../Modal/AuthModal';
+import Loader from '../Loader';
 
 function Layout() {
   const [authModalType, setAuthModalType] = useState(null);
@@ -96,8 +98,15 @@ function Layout() {
           )}
         </RightContainer>
       </Header>
-      <main>
-        <Suspense fallback={<div>Loading page...</div>}>
+      <MainStyles>
+        <Suspense
+          fallback={
+            <Loader
+              fullPage
+              color={isHome ? 'var(--light-color)' : 'var(--accent-color)'}
+            />
+          }
+        >
           {isHome ? (
             <Outlet />
           ) : (
@@ -106,7 +115,7 @@ function Layout() {
             </Container>
           )}
         </Suspense>
-      </main>
+      </MainStyles>
       {authModalType && (
         <AuthModal type={authModalType} onClose={handleCloseModal} />
       )}

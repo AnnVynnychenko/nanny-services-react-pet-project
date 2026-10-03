@@ -1,7 +1,12 @@
-import { createContext, useEffect, useState } from 'react';
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { authFirebase } from '../firebase/config';
-import Loader from '../components/Loader';
 
 export const AuthContext = createContext();
 
@@ -18,18 +23,23 @@ export function AuthProvider({ children }) {
     return () => unsubscribe();
   }, []);
 
-  const logOut = () => signOut(authFirebase);
+  const logOut = useCallback(async () => {
+    try {
+      await signOut(authFirebase);
+    } catch (err) {
+      console.error('Logout failed', err);
+    }
+  }, []);
 
-  const value = {
-    user,
-    isLoggedIn: !!user,
-    loading,
-    logOut,
-  };
-
-  return (
-    <AuthContext.Provider value={value}>
-      {loading ? <Loader fullPage /> : children}
-    </AuthContext.Provider>
+  const value = useMemo(
+    () => ({
+      user,
+      isLoggedIn: !!user,
+      loading,
+      logOut,
+    }),
+    [user, loading, logOut]
   );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

@@ -26,7 +26,7 @@ function App() {
       </Routes>
 
       <Toaster
-        position="top-center"
+        position="top-left"
         toastOptions={{
           duration: 2000,
           removeDelay: 1000,

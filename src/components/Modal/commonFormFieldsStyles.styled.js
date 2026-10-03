@@ -16,7 +16,6 @@ export const commonFormFieldsStyles = css`
 
   &::placeholder {
     font-size: ${clampBuilder(12, 16)};
-    font-weight: 400;
     line-height: 1.25;
     color: var(--dark-text-color);
   }

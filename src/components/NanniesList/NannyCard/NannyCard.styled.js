@@ -232,7 +232,6 @@ export const NannyAboutWrapper = styled.p`
         `}
 
   font-size: ${clampBuilder(12, 16)};
-  font-weight: 400;
   line-height: 1.25;
 
   color: var(--grey-text-color-transp);

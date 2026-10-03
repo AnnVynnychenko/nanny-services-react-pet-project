@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getFavorites } from '../../helpers/favoritesService';
 import NanniesList from '../../components/NanniesList';
-import { isOnline } from '../../data/NannyIsOnline';
+import { isOnline } from '../../data/nannyIsOnline';
 import NanniesFilter from '../../components/NanniesFilter';
 import { filterSwitch } from '../../helpers/filterSwitch';
 import { CARDS_PER_PAGE } from '../../data/pagination';

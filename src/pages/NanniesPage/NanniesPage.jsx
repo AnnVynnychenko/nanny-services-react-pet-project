@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { get } from 'firebase/database';
 import NanniesList from '../../components/NanniesList';
-import { isOnline } from '../../data/NannyIsOnline';
+import { isOnline } from '../../data/nannyIsOnline';
 import NanniesFilter from '../../components/NanniesFilter';
 import { CARDS_PER_PAGE } from '../../data/pagination';
 import LoadMoreBtn from '../../components/Buttons/LoadMoreBtn/LoadMoreBtn';

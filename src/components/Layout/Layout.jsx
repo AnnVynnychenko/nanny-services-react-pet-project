@@ -15,7 +15,7 @@ import {
 } from './Layout.styled';
 import { Container } from '../../styles/Common.styled';
 import { useAuth } from '../../hooks/useAuth';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import AuthModal from '../Modal/AuthModal';
 
 function Layout() {
@@ -97,13 +97,15 @@ function Layout() {
         </RightContainer>
       </Header>
       <main>
-        {isHome ? (
-          <Outlet />
-        ) : (
-          <Container>
+        <Suspense fallback={<div>Loading page...</div>}>
+          {isHome ? (
             <Outlet />
-          </Container>
-        )}
+          ) : (
+            <Container>
+              <Outlet />
+            </Container>
+          )}
+        </Suspense>
       </main>
       {authModalType && (
         <AuthModal type={authModalType} onClose={handleCloseModal} />

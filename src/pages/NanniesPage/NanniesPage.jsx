@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, Outlet, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { get } from 'firebase/database';
 import NanniesList from '../../components/NanniesList';
 import { isOnline } from '../../data/NannyIsOnline';
@@ -97,10 +97,6 @@ function NanniesPage() {
         activeFilterValue={activeFilterValue}
       />
       <NanniesList nannies={nannies} isOnline={isOnline} />
-      <Link to="details">
-        <button type="button"></button>
-      </Link>
-      <Outlet />
       {hasMore && nannies.length > 0 && (
         <LoadMoreBtn onClick={handleLoadMore} disabled={loadingMore} />
       )}

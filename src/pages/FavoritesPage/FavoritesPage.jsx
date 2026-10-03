@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, Outlet, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { getFavorites } from '../../helpers/favoritesService';
 import NanniesList from '../../components/NanniesList';
 import { isOnline } from '../../data/NannyIsOnline';
@@ -71,10 +71,6 @@ function FavoritesPage() {
         />
       )}
       <NanniesList nannies={visibleNannies} isOnline={isOnline} />
-      <Link to="details">
-        <button type="button"></button>
-      </Link>
-      <Outlet />
       {hasMore && <LoadMoreBtn onClick={handleLoadMore} />}
     </section>
   );

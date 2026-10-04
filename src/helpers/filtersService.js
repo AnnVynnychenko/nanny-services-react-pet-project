@@ -1,14 +1,3 @@
-export const parseSnapshot = snapshot => {
-  const nannies = [];
-  snapshot.forEach(childSnapshot => {
-    nannies.push({
-      ...childSnapshot.val(),
-      id: childSnapshot.key,
-    });
-  });
-  return nannies;
-};
-
 export const sortAtoZ = (arr = [], key = 'name') => {
   return arr.sort((a, b) => {
     const valA = a[key] ?? '';

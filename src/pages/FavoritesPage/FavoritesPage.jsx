@@ -9,9 +9,12 @@ import { CARDS_PER_PAGE } from '../../data/pagination';
 import LoadMoreBtn from '../../components/Buttons/LoadMoreBtn/LoadMoreBtn';
 import { useAuth } from '../../hooks/useAuth';
 import { DEFAULT_FILTER } from '../../data/filterDefaultParam';
+import { fetchNanniesByIds } from '../../api/nanniesApi';
+import Loader from '../../components/Loader';
 
 function FavoritesPage() {
   const [favorites, setFavorites] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [cardsLimit, setCardsLimit] = useState(CARDS_PER_PAGE);
 
   const { user } = useAuth();
@@ -20,19 +23,36 @@ function FavoritesPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeFilterValue = searchParams.get('filter') || DEFAULT_FILTER;
 
-  useEffect(() => {
-    if (!uid) return;
+  const resetFavoritesState = () => {
+    setFavorites([]);
+    setLoading(false);
+    return;
+  };
 
-    const handleFavoritesUpdate = () => {
-      setFavorites(getFavorites(uid));
+  useEffect(() => {
+    if (!uid) {
+      resetFavoritesState();
+    }
+
+    const loadFavoritesNannies = async () => {
+      setLoading(true);
+      const favoritesIds = getFavorites(uid);
+
+      if (!favoritesIds.length) {
+        resetFavoritesState();
+      }
+
+      const fetchNannies = await fetchNanniesByIds(favoritesIds);
+      setFavorites(fetchNannies);
+      setLoading(false);
     };
 
-    handleFavoritesUpdate();
+    loadFavoritesNannies();
 
-    window.addEventListener('favoritesUpdated', handleFavoritesUpdate);
+    window.addEventListener('favoritesUpdated', loadFavoritesNannies);
 
     return () =>
-      window.removeEventListener('favoritesUpdated', handleFavoritesUpdate);
+      window.removeEventListener('favoritesUpdated', loadFavoritesNannies);
   }, [uid]);
 
   const { visibleNannies, hasMore } = useMemo(() => {
@@ -56,6 +76,10 @@ function FavoritesPage() {
 
   function handleLoadMore() {
     setCardsLimit(prev => prev + CARDS_PER_PAGE);
+  }
+
+  if (loading) {
+    return <Loader fullPage />;
   }
 
   if (!favorites.length) {

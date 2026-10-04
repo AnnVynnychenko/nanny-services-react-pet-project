@@ -6,7 +6,7 @@ import { isOnline } from '../../data/nannyIsOnline';
 import NanniesFilter from '../../components/NanniesFilter';
 import { CARDS_PER_PAGE } from '../../data/pagination';
 import LoadMoreBtn from '../../components/Buttons/LoadMoreBtn/LoadMoreBtn';
-import { parseSnapshot } from '../../helpers/filtersService';
+import { parseSnapshot } from '../../api/nanniesApi';
 import { buildFirebaseQuery } from '../../api/nanniesApi';
 import { DEFAULT_FILTER } from '../../data/filterDefaultParam';
 import Loader from '../../components/Loader';

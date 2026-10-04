@@ -7,14 +7,22 @@ const getFavoritesKey = userId => {
 export const getFavorites = userId => {
   const key = getFavoritesKey(userId);
   if (!key) return [];
-  const data = localStorage.getItem(key);
 
-  return data ? JSON.parse(data) : [];
+  try {
+    const data = localStorage.getItem(key);
+    if (data) {
+      return JSON.parse(data);
+    }
+  } catch (err) {
+    console.error('Failed to parse favorites from localStorage:', err);
+  }
+  return [];
 };
 
 export const isFavorite = (id, userId) => {
+  if (!id || !userId) return false;
   const favorites = getFavorites(userId);
-  return favorites.some(favorite => favorite.id === id);
+  return favorites.includes(id);
 };
 
 export const toggleFavorite = (data, userId, itemName = 'Nanny') => {
@@ -23,23 +31,29 @@ export const toggleFavorite = (data, userId, itemName = 'Nanny') => {
     return false;
   }
 
+  if (!data?.id) {
+    return false;
+  }
+
   const key = getFavoritesKey(userId);
   const favorites = getFavorites(userId);
-  const index = favorites.findIndex(item => item.id === data.id);
+  const index = favorites.findIndex(item => item === data.id);
 
   let isNowFavorite = false;
   let updated = [];
 
   if (index >= 0) {
-    updated = favorites.filter(item => item.id !== data.id);
-    updated.length > 0
-      ? localStorage.setItem(key, JSON.stringify(updated))
-      : localStorage.removeItem(key);
+    updated = favorites.filter(item => item !== data.id);
+    if (updated.length > 0) {
+      localStorage.setItem(key, JSON.stringify(updated));
+    } else {
+      localStorage.removeItem(key);
+    }
 
     isNowFavorite = false;
     toast.success(`${itemName} successfully removed from favorites!`);
   } else {
-    updated = [...favorites, data];
+    updated = [...favorites, data.id];
     localStorage.setItem(key, JSON.stringify(updated));
     isNowFavorite = true;
     toast.success(`${itemName} successfully added to favorites!`);

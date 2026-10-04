@@ -1,4 +1,5 @@
 import {
+  get,
   endAt,
   limitToFirst,
   limitToLast,
@@ -51,4 +52,39 @@ export const buildFirebaseQuery = (filter, limit) => {
     }
   };
   return query(nanniesRef, ...getFilterRules());
+};
+
+export const parseSnapshot = snapshot => {
+  const nannies = [];
+  snapshot.forEach(childSnapshot => {
+    nannies.push({
+      ...childSnapshot.val(),
+      id: childSnapshot.key,
+    });
+  });
+  return nannies;
+};
+
+export const fetchNanniesByIds = async idsArray => {
+  if (!idsArray || !idsArray.length) return [];
+
+  try {
+    const promises = idsArray.map(async id => {
+      const nannyRef = ref(dbFirebase, `nannies/${id}`);
+      const snapshot = await get(nannyRef);
+      if (snapshot.exists()) {
+        return {
+          ...snapshot.val(),
+          id: snapshot.key,
+        };
+      }
+      return null;
+    });
+
+    const results = await Promise.all(promises);
+    return results.filter(Boolean);
+  } catch (err) {
+    console.error('Failed to fetch favorite nannies:', err);
+    return [];
+  }
 };

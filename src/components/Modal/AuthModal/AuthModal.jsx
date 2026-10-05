@@ -106,6 +106,7 @@ function AuthModal({ type = 'login', onClose }) {
               $hasRightIcon
             />
             <EyeIconBtn
+              type="button"
               showPassword={showPassword}
               togglePasswordVisibility={togglePasswordVisibility}
             />

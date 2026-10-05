@@ -1,7 +1,9 @@
 export const calculateAge = birthdayString => {
-  if (!birthdayString) return '';
+  if (!birthdayString) return null;
 
   const birthDate = new Date(birthdayString);
+  if (isNaN(birthDate.getTime())) return null;
+
   const today = new Date();
 
   const age = today.getFullYear() - birthDate.getFullYear();
@@ -14,5 +16,5 @@ export const calculateAge = birthdayString => {
     return age - 1;
   }
 
-  return age;
+  return age < 0 ? 0 : age;
 };

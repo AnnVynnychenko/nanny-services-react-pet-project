@@ -8,23 +8,22 @@ import {
 } from './filtersService';
 
 export const filterSwitch = (activeFilterValue, nannies) => {
-  const nanniesData = [...nannies];
   switch (activeFilterValue) {
     case 'A to Z':
-      return sortAtoZ(nanniesData);
+      return sortAtoZ(nannies);
     case 'Z to A':
-      return sortZtoA(nanniesData);
+      return sortZtoA(nannies);
     case 'Less than 10$':
-      return filterLessThanOrEqualNumber(nanniesData);
+      return filterLessThanOrEqualNumber(nannies);
     case 'Greater than 10$':
-      return filterGreaterThanNumber(nanniesData);
+      return filterGreaterThanNumber(nannies);
     case 'Popular':
-      return sortPopular(nanniesData);
+      return sortPopular(nannies);
     case 'Not popular':
-      return sortNotPopular(nanniesData);
+      return sortNotPopular(nannies);
     case 'Show all':
-      return nanniesData;
+      return nannies;
     default:
-      return nanniesData;
+      return nannies;
   }
 };

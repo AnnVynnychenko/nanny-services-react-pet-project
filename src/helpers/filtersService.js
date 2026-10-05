@@ -1,77 +1,58 @@
-export const sortAtoZ = (arr = [], key = 'name') => {
-  return arr.sort((a, b) => {
-    const valA = a[key] ?? '';
-    const valB = b[key] ?? '';
-    return valA.localeCompare(valB);
+const sortByStringKey = (arr = [], key = 'name', isAscending = true) => {
+  return [...arr].sort((a, b) => {
+    const valA = String(a[key] ?? '');
+    const valB = String(b[key] ?? '');
+
+    const comparison = valA.localeCompare(valB, 'en', { sensitivity: 'base' });
+
+    return isAscending ? comparison : -comparison;
   });
 };
 
-export const sortZtoA = (arr = [], key = 'name') => {
-  return arr.sort((a, b) => {
-    const valA = a[key] ?? '';
-    const valB = b[key] ?? '';
-    return valB.localeCompare(valA);
-  });
+const getNumericValue = (item, key) => {
+  const value = item?.[key];
+  if (value === null || value === undefined) return NaN;
+
+  return typeof value === 'number' ? value : parseFloat(value);
 };
 
-export const filterLessThanOrEqualNumber = (
+const filterByNumber = (
   arr = [],
   key = 'price_per_hour',
-  number = 10
+  limit = 10,
+  mode = 'lessOrEqual'
 ) => {
-  const targetNumber = Number(number);
+  const targetNumber = Number(limit);
+
   return arr.filter(item => {
-    const price = item[key] ?? 0;
-
-    if (price === null || price === undefined) return false;
-
-    const parsedPrice = typeof price === 'number' ? price : parseFloat(price);
-
+    const parsedPrice = getNumericValue(item, key);
     if (Number.isNaN(parsedPrice)) return false;
 
-    return parsedPrice <= targetNumber;
+    return mode === 'lessOrEqual'
+      ? parsedPrice <= targetNumber
+      : parsedPrice > targetNumber;
   });
 };
 
-export const filterGreaterThanNumber = (
-  arr = [],
-  key = 'price_per_hour',
-  number = 10
-) => {
-  const targetNumber = Number(number);
-  return arr.filter(item => {
-    const price = item[key] ?? 0;
-
-    if (price === null || price === undefined) return false;
-
-    const parsedPrice = typeof price === 'number' ? price : parseFloat(price);
-
-    if (Number.isNaN(parsedPrice)) return false;
-
-    return parsedPrice > targetNumber;
-  });
-};
-
-export const sortPopular = (arr = [], key = 'rating') => {
-  return arr.sort((a, b) => {
-    const valA = parseFloat(a[key]);
-    const valB = parseFloat(b[key]);
+const sortByNumericKey = (arr = [], key = 'rating', isAscending = true) => {
+  return [...arr].sort((a, b) => {
+    const valA = getNumericValue(a, key);
+    const valB = getNumericValue(b, key);
 
     const validA = Number.isNaN(valA) ? 0 : valA;
     const validB = Number.isNaN(valB) ? 0 : valB;
 
-    return validB - validA;
+    return isAscending ? validA - validB : validB - validA;
   });
 };
 
-export const sortNotPopular = (arr = [], key = 'rating') => {
-  return arr.sort((a, b) => {
-    const valA = parseFloat(a[key]);
-    const valB = parseFloat(b[key]);
+export const sortAtoZ = (arr, key) => sortByStringKey(arr, key, true);
+export const sortZtoA = (arr, key) => sortByStringKey(arr, key, false);
 
-    const validA = Number.isNaN(valA) ? 0 : valA;
-    const validB = Number.isNaN(valB) ? 0 : valB;
+export const sortPopular = (arr, key) => sortByNumericKey(arr, key, false);
+export const sortNotPopular = (arr, key) => sortByNumericKey(arr, key, true);
 
-    return validA - validB;
-  });
-};
+export const filterLessThanOrEqualNumber = (arr, key, number) =>
+  filterByNumber(arr, key, number, 'lessOrEqual');
+export const filterGreaterThanNumber = (arr, key, number) =>
+  filterByNumber(arr, key, number, 'greater');

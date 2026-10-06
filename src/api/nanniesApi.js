@@ -7,18 +7,23 @@ import {
   orderByKey,
   query,
   ref,
-  startAfter,
+  startAt,
 } from 'firebase/database';
 import { dbFirebase } from '../firebase/config';
-import { FILTER_OPTIONS, FIREBASE_INDEX_ON } from '../data/filterDefaultParam';
+import {
+  FILTER_OPTIONS,
+  FIREBASE_INDEX_ON,
+  GREATER_THAN_PRICE,
+  PRICE_THRESHOLD,
+} from '../data/filterDefaultParam';
 
 const nanniesRef = ref(dbFirebase, 'nannies');
 
 const {
   A_TO_Z,
   Z_TO_A,
-  LESS_THAN_10,
-  GREATER_THAN_10,
+  LESS_THAN_THRESHOLD,
+  GREATER_THAN_THRESHOLD,
   POPULAR,
   NOT_POPULAR,
   SHOW_ALL,
@@ -33,12 +38,16 @@ export const buildFirebaseQuery = (filter, limit) => {
         return [orderByChild(NAME), limitToFirst(limit)];
       case Z_TO_A:
         return [orderByChild(NAME), limitToLast(limit)];
-      case LESS_THAN_10:
-        return [orderByChild(PRICE_PER_HOUR), endAt(10), limitToFirst(limit)];
-      case GREATER_THAN_10:
+      case LESS_THAN_THRESHOLD:
         return [
           orderByChild(PRICE_PER_HOUR),
-          startAfter(10),
+          endAt(PRICE_THRESHOLD),
+          limitToFirst(limit),
+        ];
+      case GREATER_THAN_THRESHOLD:
+        return [
+          orderByChild(PRICE_PER_HOUR),
+          startAt(GREATER_THAN_PRICE),
           limitToFirst(limit),
         ];
       case POPULAR:
@@ -54,7 +63,7 @@ export const buildFirebaseQuery = (filter, limit) => {
   return query(nanniesRef, ...getFilterRules());
 };
 
-export const parseSnapshot = snapshot => {
+export const parseSnapshot = (snapshot, filter) => {
   const nannies = [];
   snapshot.forEach(childSnapshot => {
     nannies.push({
@@ -62,6 +71,12 @@ export const parseSnapshot = snapshot => {
       id: childSnapshot.key,
     });
   });
+
+  const isReversedFilter = [Z_TO_A, POPULAR].includes(filter);
+  if (isReversedFilter) {
+    nannies.reverse();
+  }
+
   return nannies;
 };
 

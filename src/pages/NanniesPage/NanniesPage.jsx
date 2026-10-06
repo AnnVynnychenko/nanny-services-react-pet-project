@@ -6,8 +6,7 @@ import { isOnline } from '../../data/nannyIsOnline';
 import NanniesFilter from '../../components/NanniesFilter';
 import { CARDS_PER_PAGE } from '../../data/pagination';
 import LoadMoreBtn from '../../components/Buttons/LoadMoreBtn/LoadMoreBtn';
-import { parseSnapshot } from '../../api/nanniesApi';
-import { buildFirebaseQuery } from '../../api/nanniesApi';
+import { parseSnapshot, buildFirebaseQuery } from '../../api/nanniesApi';
 import { DEFAULT_FILTER } from '../../data/filterDefaultParam';
 import Loader from '../../components/Loader';
 
@@ -23,6 +22,8 @@ function NanniesPage() {
   const activeFilterValue = searchParams.get('filter') || DEFAULT_FILTER;
 
   useEffect(() => {
+    let isSubscribed = true;
+
     const fetchNannies = async () => {
       if (cardsLimit === CARDS_PER_PAGE) {
         setLoading(true);
@@ -38,21 +39,14 @@ function NanniesPage() {
         );
         const snapshot = await get(currentQuery);
 
-        if (snapshot.exists()) {
-          let parsedData = parseSnapshot(snapshot);
+        if (!isSubscribed) return;
 
+        if (snapshot.exists()) {
+          let parsedData = parseSnapshot(snapshot, activeFilterValue);
           const hasMoreItems = parsedData.length > cardsLimit;
 
           if (hasMoreItems) {
             parsedData = parsedData.slice(0, cardsLimit);
-          }
-
-          const filterReverse = ['Z to A', 'Popular'].includes(
-            activeFilterValue
-          );
-
-          if (filterReverse) {
-            parsedData.reverse();
           }
 
           setNannies(parsedData);
@@ -62,18 +56,26 @@ function NanniesPage() {
           setHasMore(false);
         }
       } catch (err) {
-        console.error('Firebase query error:', err);
-        setError('Failed to fetch data from the server.');
+        if (isSubscribed) {
+          setError('Failed to fetch data from the server.');
+        }
       } finally {
-        setLoading(false);
-        setLoadingMore(false);
+        if (isSubscribed) {
+          setLoading(false);
+          setLoadingMore(false);
+        }
       }
     };
 
     fetchNannies();
+
+    return () => {
+      isSubscribed = false;
+    };
   }, [activeFilterValue, cardsLimit]);
 
   function handleLoadMore() {
+    if (loadingMore) return;
     setCardsLimit(prev => prev + CARDS_PER_PAGE);
   }
 
@@ -101,7 +103,7 @@ function NanniesPage() {
       ) : (
         <NanniesList nannies={nannies} isOnline={isOnline} />
       )}
-      {hasMore && nannies.length > 0 && (
+      {hasMore && nannies.length > 0 && !loading && (
         <LoadMoreBtn onClick={handleLoadMore} disabled={loadingMore} />
       )}
     </section>

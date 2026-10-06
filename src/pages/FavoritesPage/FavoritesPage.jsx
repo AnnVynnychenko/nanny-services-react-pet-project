@@ -23,36 +23,62 @@ function FavoritesPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeFilterValue = searchParams.get('filter') || DEFAULT_FILTER;
 
-  const resetFavoritesState = () => {
-    setFavorites([]);
-    setLoading(false);
-    return;
-  };
-
   useEffect(() => {
-    if (!uid) {
-      resetFavoritesState();
-    }
+    let isMounted = true;
+    setCardsLimit(CARDS_PER_PAGE);
 
-    const loadFavoritesNannies = async () => {
-      setLoading(true);
-      const favoritesIds = getFavorites(uid);
+    const loadFavoritesNannies = async (showLoader = true) => {
+      const resetFavoritesState = () => {
+        if (isMounted) {
+          setFavorites([]);
+          setLoading(false);
+        }
+      };
 
-      if (!favoritesIds.length) {
+      if (!uid) {
         resetFavoritesState();
+        return;
       }
 
-      const fetchNannies = await fetchNanniesByIds(favoritesIds);
-      setFavorites(fetchNannies);
-      setLoading(false);
+      if (showLoader && isMounted) {
+        setLoading(true);
+      }
+
+      try {
+        const favoritesIds = getFavorites(uid);
+
+        if (!favoritesIds.length) {
+          resetFavoritesState();
+          return;
+        }
+        const fetchNannies = await fetchNanniesByIds(favoritesIds);
+
+        if (isMounted) {
+          setFavorites(fetchNannies || []);
+        }
+      } catch (err) {
+        if (isMounted) {
+          console.error('Unexpected error in loadFavoritesNannies:', err);
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
     };
 
-    loadFavoritesNannies();
+    loadFavoritesNannies(true);
 
-    window.addEventListener('favoritesUpdated', loadFavoritesNannies);
+    const handleFavoritesUpdates = () => {
+      loadFavoritesNannies(false);
+    };
 
-    return () =>
-      window.removeEventListener('favoritesUpdated', loadFavoritesNannies);
+    window.addEventListener('favoritesUpdated', handleFavoritesUpdates);
+
+    return () => {
+      isMounted = false;
+      window.removeEventListener('favoritesUpdated', handleFavoritesUpdates);
+    };
   }, [uid]);
 
   const { visibleNannies, hasMore } = useMemo(() => {
@@ -78,24 +104,24 @@ function FavoritesPage() {
     setCardsLimit(prev => prev + CARDS_PER_PAGE);
   }
 
-  if (loading) {
-    return <Loader fullPage />;
-  }
-
-  if (!favorites.length) {
-    return <p>You haven't added any nannies to favorites yet.</p>;
-  }
-
   return (
     <section>
-      {favorites && (
+      {favorites.length > 0 && (
         <NanniesFilter
           onSelectFilter={handleSelectFilter}
           activeFilterValue={activeFilterValue}
         />
       )}
-      <NanniesList nannies={visibleNannies} isOnline={isOnline} />
-      {hasMore && <LoadMoreBtn onClick={handleLoadMore} />}
+      {loading ? (
+        <Loader size={40} />
+      ) : !favorites.length ? (
+        <p>You haven't added any nannies to favorites yet.</p>
+      ) : (
+        <>
+          <NanniesList nannies={visibleNannies} isOnline={isOnline} />
+          {hasMore && <LoadMoreBtn onClick={handleLoadMore} />}
+        </>
+      )}
     </section>
   );
 }

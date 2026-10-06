@@ -75,3 +75,10 @@ fill in your Firebase configuration keys.
 ```bash
 npm start
 ```
+
+## 🔗 Project Links
+
+- 🎨 **Figma Design:**
+  [View Figma Layout](https://www.figma.com/file/u36ajEOsnwio2GDGiabVPD/Nanny-Sevices?type=design&node-id=0-1&mode=design&t=CZpMnnOCRwAYc81O-0)
+- 📋 **Project Requirements (ТЗ):**
+  [View Technical Task](https://docs.google.com/document/d/19ugM1gvOw81nCyALr4EZs3dmv6OfJm94VjupcytbnJY/edit?pli=1&tab=t.0)
